@@ -2,7 +2,9 @@
   "name": "@nx-example-two/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "format": "prettier --write \"**/*.ts\" --cache"
+  },
   "private": true,
   "dependencies": {
     "axios": "^1.6.0",
@@ -27,12 +29,11 @@
     "@types/node": "20.19.9",
     "esbuild": "^0.19.2",
     "eslint": "^9.8.0",
-    "eslint-config-prettier": "^10.0.0",
     "jest": "^30.0.2",
     "jest-environment-node": "^30.0.2",
     "jest-util": "^30.0.2",
     "nx": "21.5.2",
-    "prettier": "^2.6.2",
+    "prettier": "^3.6.2",
     "ts-jest": "^29.4.0",
     "ts-node": "10.9.1",
     "tslib": "^2.3.0",
