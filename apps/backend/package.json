@@ -22,23 +22,12 @@
           "assets": [
             "apps/backend/src/assets"
           ],
-          "esbuildOptions": {
-            "sourcemap": true,
-            "outExtension": {
-              ".js": ".js"
-            }
-          }
+          "esbuildConfig": "apps/backend/esbuild.config.js"
         },
         "configurations": {
           "development": {},
           "production": {
-            "generateLockfile": true,
-            "esbuildOptions": {
-              "sourcemap": false,
-              "outExtension": {
-                ".js": ".js"
-              }
-            }
+            "generateLockfile": true
           }
         }
       },
