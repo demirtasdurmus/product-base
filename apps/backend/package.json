@@ -74,7 +74,7 @@
         ],
         "options": {
           "buildTarget": "@nx-example-two/backend:build",
-          "runBuildTargetDependencies": false
+          "runBuildTargetDependencies": true
         },
         "configurations": {
           "development": {

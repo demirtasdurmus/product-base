@@ -32,6 +32,7 @@
     "jest": "^30.0.2",
     "jest-environment-node": "^30.0.2",
     "jest-util": "^30.0.2",
+    "jsonc-eslint-parser": "^2.1.0",
     "nx": "21.5.2",
     "prettier": "^3.6.2",
     "ts-jest": "^29.4.0",
@@ -41,6 +42,7 @@
     "typescript-eslint": "^8.40.0"
   },
   "workspaces": [
-    "apps/*"
+    "apps/*",
+    "libs/shared"
   ]
 }

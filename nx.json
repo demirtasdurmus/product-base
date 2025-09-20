@@ -17,7 +17,6 @@
   "tui": {
     "enabled": false
   },
-  "nxCloudId": "68cd51d9cb870d6db6436580",
   "plugins": [
     {
       "plugin": "@nx/js/typescript",
@@ -62,6 +61,11 @@
     },
     "test": {
       "dependsOn": ["^build"]
+    },
+    "@nx/js:tsc": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
     }
   }
 }
