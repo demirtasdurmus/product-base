@@ -5,7 +5,7 @@ export default [
   ...nx.configs['flat/typescript'],
   ...nx.configs['flat/javascript'],
   {
-    ignores: ['**/dist', 'tmp', 'node_modules', '.nx', 'package-lock.json']
+    ignores: ['**/dist', 'tmp', 'node_modules', '.nx', 'package-lock.json', '**/test-output']
   },
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],

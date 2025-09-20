@@ -46,3 +46,21 @@ Thumbs.db
 test-output
 
 .github/instructions/
+
+# Expo
+apps/mobile/android
+apps/mobile/ios
+node_modules/
+.expo/
+.yarn/
+dist/
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+cache/
+
