@@ -6,10 +6,10 @@
     "targets": {
       "build": {
         "executor": "@nx/esbuild:esbuild",
+        "defaultConfiguration": "development",
         "outputs": [
           "{options.outputPath}"
         ],
-        "defaultConfiguration": "production",
         "options": {
           "platform": "node",
           "outputPath": "apps/backend/dist",
@@ -17,6 +17,8 @@
             "cjs"
           ],
           "bundle": false,
+          "minify": false,
+          "sourcemap": true,
           "main": "apps/backend/src/main.ts",
           "tsConfig": "apps/backend/tsconfig.app.json",
           "assets": [
@@ -25,10 +27,30 @@
           "esbuildConfig": "apps/backend/esbuild.config.js"
         },
         "configurations": {
-          "development": {},
+          "staging": {
+            "sourcemap": true,
+            "minify": true
+          },
           "production": {
-            "generateLockfile": true
+            "minify": true,
+            "sourcemap": false
           }
+        }
+      },
+      "serve": {
+        "continuous": true,
+        "executor": "@nx/js:node",
+        "dependsOn": [
+          "build"
+        ],
+        "options": {
+          "buildTarget": "@nx-example-two/backend:build",
+          "runBuildTargetDependencies": true
+        }
+      },
+      "test": {
+        "options": {
+          "passWithNoTests": true
         }
       },
       "prune-lockfile": {
@@ -64,31 +86,6 @@
           "copy-workspace-modules"
         ],
         "executor": "nx:noop"
-      },
-      "serve": {
-        "continuous": true,
-        "executor": "@nx/js:node",
-        "defaultConfiguration": "development",
-        "dependsOn": [
-          "build"
-        ],
-        "options": {
-          "buildTarget": "@nx-example-two/backend:build",
-          "runBuildTargetDependencies": true
-        },
-        "configurations": {
-          "development": {
-            "buildTarget": "@nx-example-two/backend:build:development"
-          },
-          "production": {
-            "buildTarget": "@nx-example-two/backend:build:production"
-          }
-        }
-      },
-      "test": {
-        "options": {
-          "passWithNoTests": true
-        }
       },
       "docker:build": {
         "dependsOn": [
