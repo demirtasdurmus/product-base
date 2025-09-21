@@ -1,10 +1,10 @@
 {
-  "name": "@nx-example-two/backend-e2e",
+  "name": "@product-base/backend-e2e",
   "version": "0.0.1",
   "private": true,
   "nx": {
     "implicitDependencies": [
-      "@nx-example-two/backend"
+      "@product-base/backend"
     ],
     "targets": {
       "e2e": {
@@ -17,8 +17,8 @@
           "passWithNoTests": true
         },
         "dependsOn": [
-          "@nx-example-two/backend:build",
-          "@nx-example-two/backend:serve"
+          "@product-base/backend:build",
+          "@product-base/backend:serve"
         ]
       }
     }

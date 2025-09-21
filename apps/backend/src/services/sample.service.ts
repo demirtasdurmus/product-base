@@ -1,4 +1,4 @@
-import { shared, models } from '@nx-example-two/shared';
+import { shared, models } from '@product-base/shared';
 import { db } from '../utils/db.js';
 
 export function calculateSample() {

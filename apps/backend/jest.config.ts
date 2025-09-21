@@ -7,7 +7,7 @@ const swcJestConfig = JSON.parse(readFileSync(`${__dirname}/.spec.swcrc`, 'utf-8
 swcJestConfig.swcrc = false;
 
 export default {
-  displayName: '@nx-example-two/backend',
+  displayName: '@product-base/backend',
   preset: '../../jest.preset.js',
   testEnvironment: 'node',
   transform: {

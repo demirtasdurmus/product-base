@@ -1,5 +1,5 @@
 {
-  "name": "@nx-example-two/backend",
+  "name": "@product-base/backend",
   "version": "0.0.1",
   "private": true,
   "type": "module",
@@ -49,7 +49,7 @@
           "build"
         ],
         "options": {
-          "buildTarget": "@nx-example-two/backend:build",
+          "buildTarget": "@product-base/backend:build",
           "runBuildTargetDependencies": true,
           "inspect": false
         }

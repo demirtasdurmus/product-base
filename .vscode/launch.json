@@ -4,9 +4,9 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Debug @nx-example-two/backend with Nx",
+      "name": "Debug @product-base/backend with Nx",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["nx", "serve", "@nx-example-two/backend"],
+      "runtimeArgs": ["nx", "serve", "@product-base/backend"],
       "env": {
         "NODE_OPTIONS": "--inspect=9229"
       },
@@ -14,10 +14,7 @@
       "internalConsoleOptions": "neverOpen",
       "skipFiles": ["<node_internals>/**"],
       "sourceMaps": true,
-      "outFiles": [
-        "${workspaceFolder}/apps/backend/dist/**/*.(m|c|)js",
-        "!**/node_modules/**"
-      ]
+      "outFiles": ["${workspaceFolder}/apps/backend/dist/**/*.(m|c|)js", "!**/node_modules/**"]
     }
   ]
 }
