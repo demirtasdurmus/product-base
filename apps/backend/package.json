@@ -45,7 +45,8 @@
         ],
         "options": {
           "buildTarget": "@nx-example-two/backend:build",
-          "runBuildTargetDependencies": true
+          "runBuildTargetDependencies": true,
+          "inspect": false
         }
       },
       "test": {
