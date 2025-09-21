@@ -1,5 +1,5 @@
 {
-  "name": "@product-base/backend",
+  "name": "@product-base/pback",
   "version": "0.0.1",
   "private": true,
   "type": "module",
@@ -13,17 +13,17 @@
         ],
         "options": {
           "platform": "node",
-          "outputPath": "apps/backend/dist",
+          "outputPath": "apps/pback/dist",
           "format": [
             "esm"
           ],
           "bundle": false,
           "minify": false,
           "sourcemap": true,
-          "main": "apps/backend/src/main.ts",
-          "tsConfig": "apps/backend/tsconfig.app.json",
+          "main": "apps/pback/src/main.ts",
+          "tsConfig": "apps/pback/tsconfig.app.json",
           "assets": [
-            "apps/backend/src/assets"
+            "apps/pback/src/assets"
           ],
           "esbuildOptions": {
             "outExtension": {
@@ -49,7 +49,7 @@
           "build"
         ],
         "options": {
-          "buildTarget": "@product-base/backend:build",
+          "buildTarget": "@product-base/pback:build",
           "runBuildTargetDependencies": true,
           "inspect": false
         }
@@ -66,8 +66,8 @@
         "cache": true,
         "executor": "@nx/js:prune-lockfile",
         "outputs": [
-          "{workspaceRoot}/apps/backend/dist/package.json",
-          "{workspaceRoot}/apps/backend/dist/package-lock.json"
+          "{workspaceRoot}/apps/pback/dist/package.json",
+          "{workspaceRoot}/apps/pback/dist/package-lock.json"
         ],
         "options": {
           "buildTarget": "build"
@@ -79,7 +79,7 @@
         ],
         "cache": true,
         "outputs": [
-          "{workspaceRoot}/apps/backend/dist/workspace_modules"
+          "{workspaceRoot}/apps/pback/dist/workspace_modules"
         ],
         "executor": "@nx/js:copy-workspace-modules",
         "options": {

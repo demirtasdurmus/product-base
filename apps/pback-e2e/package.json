@@ -1,10 +1,10 @@
 {
-  "name": "@product-base/backend-e2e",
+  "name": "@product-base/pback-e2e",
   "version": "0.0.1",
   "private": true,
   "nx": {
     "implicitDependencies": [
-      "@product-base/backend"
+      "@product-base/pback"
     ],
     "targets": {
       "e2e": {
@@ -13,12 +13,12 @@
           "{projectRoot}/test-output/jest/coverage"
         ],
         "options": {
-          "jestConfig": "apps/backend-e2e/jest.config.ts",
+          "jestConfig": "apps/pback-e2e/jest.config.ts",
           "passWithNoTests": true
         },
         "dependsOn": [
-          "@product-base/backend:build",
-          "@product-base/backend:serve"
+          "@product-base/pback:build",
+          "@product-base/pback:serve"
         ]
       }
     }
