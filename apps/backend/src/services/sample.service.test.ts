@@ -1,4 +1,4 @@
-import { calculateSample } from './sample.service';
+import { calculateSample } from './sample.service.js';
 
 describe('Sample Service', () => {
   describe('calculateSample', () => {

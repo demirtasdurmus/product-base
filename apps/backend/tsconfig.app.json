@@ -14,8 +14,7 @@
     "out-tsc",
     "dist",
     "jest.config.ts",
-    "eslint.config.mjs",
-    "esbuild.config.js"
+    "eslint.config.mjs"
   ],
   "references": [
     {
