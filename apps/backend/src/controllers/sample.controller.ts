@@ -1,7 +1,7 @@
 import { RequestHandler } from 'express';
-import { sendGreeting } from '../services/sample.service';
+import { calculateSample } from '../services/sample.service';
 
 export const sampleController: RequestHandler<unknown, string, unknown, unknown> = (_req, res) => {
-  const greeting = sendGreeting();
-  res.status(200).send(greeting);
+  const sample = calculateSample();
+  res.status(200).send(sample);
 };

@@ -5,9 +5,6 @@ import { errorHandler } from './middleware/error-handler.middleware';
 
 const app: Application = express();
 
-app.get('/', (_req, res) => {
-  res.send({ message: 'Hello API' });
-});
 app.use('/api/samples', sampleRoutes);
 
 app.use(errorHandler);

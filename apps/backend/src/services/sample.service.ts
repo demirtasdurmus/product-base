@@ -1,6 +1,6 @@
 import { shared } from '@nx-example-two/shared';
 
-export function sendGreeting() {
-  shared();
-  return 'Hello, World!';
+export function calculateSample() {
+  const sharedValue = shared();
+  return `Hello, ${sharedValue}!`;
 }

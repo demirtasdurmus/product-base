@@ -1,11 +1,11 @@
-import { sendGreeting } from './sample.service';
+import { calculateSample } from './sample.service';
 
 describe('Sample Service', () => {
-  describe('sendGreeting', () => {
-    it('should return the greeting', () => {
-      const result = sendGreeting();
+  describe('calculateSample', () => {
+    it('should calculate sample with shared value', () => {
+      const result = calculateSample();
 
-      expect(result).toBe('Hello, World!');
+      expect(result).toBe('Hello, shared!');
     });
   });
 });
