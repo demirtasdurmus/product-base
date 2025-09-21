@@ -3,18 +3,21 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "format": "prettier --write \"**/*.ts\" --cache"
+    "generate": "drizzle-kit generate",
+    "migrate": "drizzle-kit migrate"
   },
   "private": true,
   "dependencies": {
     "@expo/metro-config": "~0.20.14",
     "@expo/metro-runtime": "~5.0.4",
     "axios": "^1.6.0",
+    "dotenv": "^17.2.2",
+    "drizzle-orm": "^0.44.5",
     "expo": "~53.0.10",
     "expo-splash-screen": "~0.30.9",
     "expo-status-bar": "~2.2.3",
     "expo-system-ui": "~5.0.8",
-    "express": "^5.1.0",
+    "pg": "^8.16.3",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-native": "0.79.5",
@@ -45,9 +48,11 @@
     "@types/express": "^5.0.3",
     "@types/jest": "^30.0.0",
     "@types/node": "20.19.9",
+    "@types/pg": "^8.15.5",
     "@types/react": "~19.0.10",
     "babel-jest": "^30.0.2",
     "babel-preset-expo": "~13.2.0",
+    "drizzle-kit": "^0.31.4",
     "esbuild": "^0.19.2",
     "eslint": "^9.8.0",
     "eslint-plugin-import": "2.31.0",
@@ -68,6 +73,7 @@
     "ts-jest": "^29.4.0",
     "ts-node": "10.9.1",
     "tslib": "^2.3.0",
+    "tsx": "^4.20.5",
     "typescript": "~5.9.2",
     "typescript-eslint": "^8.40.0"
   },
