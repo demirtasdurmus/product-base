@@ -1,16 +1,16 @@
 {
   "expo": {
-    "name": "Mobile",
-    "slug": "mobile",
+    "name": "PMobile",
+    "slug": "pmobile",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "mobile",
+    "scheme": "pmobile",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.demirtasdurmus.mobile"
+      "bundleIdentifier": "com.demirtasdurmus.pmobile"
     },
     "android": {
       "adaptiveIcon": {
@@ -18,7 +18,7 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.demirtasdurmus.mobile"
+      "package": "com.demirtasdurmus.pmobile"
     },
     "web": {
       "bundler": "metro",

@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'mobile',
+  displayName: 'pmobile',
   resolver: require.resolve('./jest.resolver.js'),
   preset: 'jest-expo',
   moduleFileExtensions: ['ts', 'js', 'html', 'tsx', 'jsx'],
@@ -17,5 +17,5 @@ module.exports = {
     '^.+\\.(bmp|gif|jpg|jpeg|mp4|png|psd|svg|webp|ttf|otf|m4v|mov|mp4|mpeg|mpg|webm|aac|aiff|caf|m4a|mp3|wav|html|pdf|obj)$':
       require.resolve('jest-expo/src/preset/assetFileTransformer.js')
   },
-  coverageDirectory: '../../coverage/apps/mobile'
+  coverageDirectory: '../../coverage/apps/pmobile'
 };

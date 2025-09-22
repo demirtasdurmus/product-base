@@ -34,7 +34,7 @@ export const App = () => {
           <View style={styles.section}>
             <Text style={styles.textLg}>Hello there,</Text>
             <Text style={[styles.textXL, styles.appTitleText]} testID="heading" role="heading">
-              Welcome Mobile 👋
+              Welcome PMobile 👋
             </Text>
           </View>
           <View style={styles.section}>
@@ -327,19 +327,19 @@ export const App = () => {
               <View style={styles.codeBlock}>
                 <Text style={[styles.textXS, styles.monospace, styles.comment]}># Build</Text>
                 <Text style={[styles.textXS, styles.monospace, styles.marginBottomMd]}>
-                  nx build Mobile
+                  nx build pmobile
                 </Text>
                 <Text style={[styles.textXS, styles.monospace, styles.comment]}># Test</Text>
                 <Text style={[styles.textXS, styles.monospace, styles.marginBottomMd]}>
-                  nx test Mobile
+                  nx test pmobile
                 </Text>
                 <Text style={[styles.textXS, styles.monospace, styles.comment]}># Lint</Text>
-                <Text style={[styles.textXS, styles.monospace]}>nx lint Mobile</Text>
+                <Text style={[styles.textXS, styles.monospace]}>nx lint pmobile</Text>
                 <Text style={[styles.textXS, styles.monospace, styles.comment]}>
                   # Run them together!
                 </Text>
                 <Text style={[styles.textXS, styles.monospace, styles.marginBottomMd]}>
-                  nx run-many -p Mobile -t build test lint
+                  nx run-many -p pmobile -t build test lint
                 </Text>
               </View>
 
@@ -357,7 +357,7 @@ export const App = () => {
                 </View>
               </View>
               <View style={[styles.codeBlock, styles.marginBottomLg]}>
-                <Text style={[styles.textXS, styles.monospace]}>nx show project Mobile</Text>
+                <Text style={[styles.textXS, styles.monospace]}>nx show project pmobile</Text>
               </View>
               <View style={styles.listItem}>
                 <Svg width={24} height={24} stroke="#000000" fill="none" viewBox="0 0 24 24">

@@ -13,10 +13,10 @@
       "path": "./libs/shared"
     },
     {
-      "path": "./apps/mobile-e2e"
+      "path": "./apps/pmobile-e2e"
     },
     {
-      "path": "./apps/mobile"
+      "path": "./apps/pmobile"
     }
   ]
 }

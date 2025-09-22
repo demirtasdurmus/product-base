@@ -1,10 +1,10 @@
 {
-  "name": "mobile-e2e",
+  "name": "pmobile-e2e",
   "version": "0.0.1",
   "private": true,
   "nx": {
     "implicitDependencies": [
-      "mobile"
+      "pmobile"
     ]
   }
 }

@@ -48,8 +48,8 @@ test-output
 .github/instructions/
 
 # Expo
-apps/mobile/android
-apps/mobile/ios
+apps/pmobile/android
+apps/pmobile/ios
 node_modules/
 .expo/
 .yarn/
@@ -59,7 +59,7 @@ npm-debug.*
 *.p8
 *.p12
 *.key
-*.mobileprovision
+*.pmobileprovision
 *.orig.*
 web-build/
 cache/
