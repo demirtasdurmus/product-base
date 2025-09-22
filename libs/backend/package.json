@@ -1,5 +1,5 @@
 {
-  "name": "@product-base/shared",
+  "name": "@product-base/backend",
   "version": "0.0.1",
   "private": true,
   "type": "module",
@@ -16,9 +16,10 @@
     }
   },
   "nx": {
-    "name": "shared"
+    "name": "backend"
   },
   "dependencies": {
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "drizzle-orm": "^0.44.5"
   }
 }

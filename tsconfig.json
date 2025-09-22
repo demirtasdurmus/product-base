@@ -17,6 +17,9 @@
     },
     {
       "path": "./apps/pmobile"
+    },
+    {
+      "path": "./libs/backend"
     }
   ]
 }

@@ -19,6 +19,9 @@
   "references": [
     {
       "path": "../../libs/shared/tsconfig.lib.json"
+    },
+    {
+      "path": "../../libs/backend/tsconfig.lib.json"
     }
   ]
 }

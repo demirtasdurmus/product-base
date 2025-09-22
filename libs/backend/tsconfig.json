@@ -4,13 +4,7 @@
   "include": [],
   "references": [
     {
-      "path": "../../libs/shared"
-    },
-    {
-      "path": "../../libs/backend"
-    },
-    {
-      "path": "./tsconfig.app.json"
+      "path": "./tsconfig.lib.json"
     },
     {
       "path": "./tsconfig.spec.json"

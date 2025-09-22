@@ -3,15 +3,14 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "generate": "drizzle-kit generate",
-    "migrate": "drizzle-kit migrate"
+    "generate": "nx build backend && drizzle-kit generate",
+    "migrate": "nx build backend && drizzle-kit migrate"
   },
   "private": true,
   "dependencies": {
     "@expo/metro-config": "~0.20.14",
     "@expo/metro-runtime": "~5.0.4",
     "axios": "^1.6.0",
-    "dotenv": "^17.2.2",
     "drizzle-orm": "^0.44.5",
     "expo": "~53.0.10",
     "expo-splash-screen": "~0.30.9",
@@ -79,6 +78,7 @@
   },
   "workspaces": [
     "apps/*",
-    "libs/shared"
+    "libs/shared",
+    "libs/backend"
   ]
 }

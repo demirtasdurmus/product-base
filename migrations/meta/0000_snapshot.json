@@ -1,11 +1,11 @@
 {
-  "id": "69c7a943-da32-41de-850c-fd7ef5e80f17",
+  "id": "e0a98bbb-5e65-4e64-8eab-06908047a038",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
-    "public.samples": {
-      "name": "samples",
+    "public.sample": {
+      "name": "sample",
       "schema": "",
       "columns": {
         "id": {
