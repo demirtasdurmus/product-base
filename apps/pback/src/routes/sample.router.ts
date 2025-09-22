@@ -6,4 +6,4 @@ const router = Router();
 
 router.get('/', sample, sampleController);
 
-export { router as sampleRoutes };
+export { router as sampleRouter };
