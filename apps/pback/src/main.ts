@@ -1,8 +1,11 @@
+/* prettier-ignore */ /* This order should be respected for env validation */
+import { config } from './config/index.js';
+
 import { createServer } from 'http';
 import { app } from './app.js';
 
-const host = process.env.HOST ?? 'localhost';
-const port = process.env.PORT ? Number(process.env.PORT) : 3000;
+const host = config.PBACK_HOST;
+const port = config.PBACK_PORT;
 
 const server = createServer(app);
 

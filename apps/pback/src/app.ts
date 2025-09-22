@@ -1,5 +1,6 @@
 import { toNodeHandler } from 'better-auth/node';
 import express, { Application } from 'express';
+import helmet from 'helmet';
 import { errorHandler } from './middleware/error-handler.middleware.js';
 import { notFoundHandler } from './middleware/not-found-handler.middleware.js';
 import { sampleRouter } from './routes/sample.router.js';
@@ -7,6 +8,8 @@ import { userRouter } from './routes/user.router.js';
 import { auth } from './utils/auth.js';
 
 const app: Application = express();
+
+app.use(helmet());
 
 /**
  * @see https://www.better-auth.com/docs/integrations/express
