@@ -28,6 +28,7 @@
   "devDependencies": {
     "@eslint/js": "^9.8.0",
     "@expo/cli": "~0.24.14",
+    "@ianvs/prettier-plugin-sort-imports": "^4.7.0",
     "@nx/devkit": "21.5.3",
     "@nx/docker": "21.5.3",
     "@nx/esbuild": "21.5.3",

@@ -1,10 +1,10 @@
-import express, { Application } from 'express';
 import { toNodeHandler } from 'better-auth/node';
-import { sampleRouter } from './routes/sample.router.js';
-import { notFoundHandler } from './middleware/not-found-handler.middleware.js';
+import express, { Application } from 'express';
 import { errorHandler } from './middleware/error-handler.middleware.js';
-import { auth } from './utils/auth.js';
+import { notFoundHandler } from './middleware/not-found-handler.middleware.js';
+import { sampleRouter } from './routes/sample.router.js';
 import { userRouter } from './routes/user.router.js';
+import { auth } from './utils/auth.js';
 
 const app: Application = express();
 

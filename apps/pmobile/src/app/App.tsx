@@ -1,14 +1,13 @@
-/* eslint-disable jsx-a11y/accessible-emoji */
 import React, { useRef, useState } from 'react';
 import {
+  Linking,
   SafeAreaView,
-  StyleSheet,
   ScrollView,
-  View,
-  Text,
   StatusBar,
+  StyleSheet,
+  Text,
   TouchableOpacity,
-  Linking
+  View
 } from 'react-native';
 import Svg, { G, Path } from 'react-native-svg';
 
