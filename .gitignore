@@ -65,4 +65,6 @@ web-build/
 cache/
 
 .env*
+!.env.sample
 
+.harper-dictionary.txt

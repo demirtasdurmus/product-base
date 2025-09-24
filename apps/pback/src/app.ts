@@ -20,6 +20,7 @@ app.use(express.json());
 
 app.use('/api/users', userRouter);
 app.use('/api/samples', sampleRouter);
+app.get('/health', (_req, res) => res.json({ status: 'ok' }));
 
 app.use(errorHandler);
 app.all(/.*/, notFoundHandler);

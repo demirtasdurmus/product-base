@@ -4,9 +4,14 @@ const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
   PBACK_PORT: z.coerce.number().default(3000),
   PBACK_HOST: z.string().default('localhost'),
-  DATABASE_URL: z.string({ error: 'DATABASE_URL is required' }).min(1),
   BETTER_AUTH_SECRET: z.string({ error: 'BETTER_AUTH_SECRET is required' }).min(10),
-  BETTER_AUTH_URL: z.url({ error: 'BETTER_AUTH_URL is required' })
+  BETTER_AUTH_URL: z.url({ error: 'BETTER_AUTH_URL is required' }),
+  DATABASE_URL: z
+    .url({
+      message: 'DATABASE_URL must be a valid PostgreSQL connection string',
+      protocol: /^postgres$/
+    })
+    .min(10)
 });
 
 let config: z.infer<typeof envSchema>;

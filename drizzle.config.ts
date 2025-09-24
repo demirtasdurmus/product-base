@@ -1,15 +1,15 @@
 import { defineConfig } from 'drizzle-kit';
 
+if (!process.env.DATABASE_URL) {
+  console.error('DATABASE_URL is not set');
+  process.exit(1);
+}
+
 export default defineConfig({
   out: './migrations',
   schema: './libs/backend/dist/models/index.js',
   dialect: 'postgresql',
   dbCredentials: {
-    /**
-     * TODO: Typing Nodejs env variables, find a way for root and all apps
-     * Same issue in backend app
-     */
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    url: process.env.DATABASE_URL!
+    url: process.env.DATABASE_URL
   }
 });
