@@ -1,11 +1,11 @@
 {
   "expo": {
     "name": "PMobile",
-    "slug": "pmobile",
+    "slug": "@product-base/pmobile",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "pmobile",
+    "scheme": "@product-base/pmobile",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
