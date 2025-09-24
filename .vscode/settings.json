@@ -1,11 +1,14 @@
 {
   "nxConsole.generateAiAgentRules": true,
   "cSpell.words": [
+    "ianvs",
     "libpeerconnection",
+    "lintstagedrc",
     "mobileprovision",
     "nodenext",
     "pback",
     "pmobile",
+    "pmobileprovision",
     "swcrc",
     "testem"
   ]

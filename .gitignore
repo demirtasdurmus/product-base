@@ -68,3 +68,5 @@ cache/
 !.env.sample
 
 .harper-dictionary.txt
+
+tsconfig.tsbuildinfo
