@@ -58,7 +58,7 @@
         "startTargetName": "start",
         "buildTargetName": "build",
         "prebuildTargetName": "prebuild",
-        "serveTargetName": "serve",
+        "serveTargetName": "dev",
         "installTargetName": "install",
         "exportTargetName": "export",
         "submitTargetName": "submit",

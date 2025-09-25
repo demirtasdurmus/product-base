@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "eas-build-post-install": "cd ../../ && node tools/scripts/eas-build-post-install.mjs . apps/pmobile",
+    "serve:ios": "expo start --ios",
+    "serve:android": "expo start --android",
     "android": "expo run:android",
     "ios": "expo run:ios"
   },
@@ -41,7 +43,6 @@
     "react-native-screens": "*",
     "react-native-svg": "*",
     "react-native-svg-transformer": "*",
-    "react-native-web": "*",
     "zod": "*"
   }
 }

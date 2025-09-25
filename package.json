@@ -7,8 +7,13 @@
     "pback:start": "infisical run --env=dev -- node apps/pback/dist/main.js",
     "pback:test": "infisical run --env=dev -- nx test pback",
     "pback:e2e": "infisical run --env=dev -- nx e2e pback-e2e",
-    "pmobile:serve:ios": "infisical run --env=dev -- nx serve pmobile --ios",
-    "pmobile:serve:android": "infisical run --env=dev -- nx serve pmobile --android",
+    "pmobile:serve:ios": "infisical run --env=dev -- nx run pmobile:serve:ios",
+    "pmobile:serve:android": "infisical run --env=dev -- nx run pmobile:serve:android",
+    "ios:back:serve": "infisical run --env=dev -- nx run-many -p=pback -t=serve -p=pmobile -t=serve:ios",
+    "android:back:serve": "infisical run --env=dev -- nx run-many -p=pback -t=serve -p=pmobile -t=serve:android",
+    "pmobile:prebuild": "infisical run --env=dev -- nx run pmobile:prebuild",
+    "pmobile:run-ios": "infisical run --env=dev -- nx run pmobile:run-ios",
+    "pmobile:run-android": "infisical run --env=dev -- nx run pmobile:run-android",
     "generate": "nx build backend && drizzle-kit generate",
     "migrate": "nx build backend && drizzle-kit migrate",
     "prepare": "husky"
@@ -48,7 +53,6 @@
     "react-native-screens": "~4.11.1",
     "react-native-svg": "~15.11.2",
     "react-native-svg-transformer": "~1.5.1",
-    "react-native-web": "~0.20.0",
     "tailwindcss": "^3.4.17",
     "zod": "^4.1.11"
   },
