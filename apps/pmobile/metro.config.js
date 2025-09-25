@@ -23,7 +23,12 @@ const customConfig = {
   },
   resolver: {
     assetExts: assetExts.filter((ext) => ext !== 'svg'),
-    sourceExts: [...sourceExts, 'cjs', 'mjs', 'svg']
+    sourceExts: [...sourceExts, 'cjs', 'mjs', 'svg'],
+    /**
+     * Better Auth Expo integration
+     * https://www.better-auth.com/docs/integrations/expo#configure-metro-bundler
+     */
+    unstable_enablePackageExports: true
   }
 };
 

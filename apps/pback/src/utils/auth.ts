@@ -1,4 +1,5 @@
-import { betterAuth } from 'better-auth';
+import { expo } from '@better-auth/expo';
+import { betterAuth, BetterAuthPlugin } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 import { models } from '@product-base/backend';
 import { config } from '../config/index.js';
@@ -16,5 +17,10 @@ export const auth = betterAuth({
   database: drizzleAdapter(db, {
     provider: 'pg',
     schema: models
-  })
+  }),
+  /**
+   * @see https://github.com/better-auth/better-auth/issues/1974
+   */
+  plugins: [expo() as BetterAuthPlugin],
+  trustedOrigins: ['pmobile://']
 });
