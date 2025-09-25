@@ -5,11 +5,16 @@
     "libpeerconnection",
     "lintstagedrc",
     "mobileprovision",
+    "nativewind",
     "nodenext",
     "pback",
     "pmobile",
     "pmobileprovision",
     "swcrc",
-    "testem"
-  ]
+    "testem",
+    "worklets"
+  ],
+  "files.associations": {
+    "*.css": "tailwindcss"
+  }
 }
