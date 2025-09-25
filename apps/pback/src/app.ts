@@ -1,6 +1,7 @@
 import { toNodeHandler } from 'better-auth/node';
 import express, { Application } from 'express';
 import helmet from 'helmet';
+import morgan from 'morgan';
 import { errorHandler } from './middleware/error-handler.middleware.js';
 import { notFoundHandler } from './middleware/not-found-handler.middleware.js';
 import { sampleRouter } from './routers/sample.router.js';
@@ -8,6 +9,8 @@ import { userRouter } from './routers/user.router.js';
 import { auth } from './utils/auth.js';
 
 const app: Application = express();
+
+app.use(morgan('dev'));
 
 app.use(helmet());
 
