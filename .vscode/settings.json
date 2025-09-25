@@ -10,11 +10,13 @@
     "pback",
     "pmobile",
     "pmobileprovision",
+    "Pressable",
     "swcrc",
     "testem",
     "worklets"
   ],
   "files.associations": {
     "*.css": "tailwindcss"
-  }
+  },
+  "tailwindCSS.classAttributes": ["class", "className", "headerClassName"]
 }

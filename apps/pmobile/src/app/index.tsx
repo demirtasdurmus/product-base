@@ -1,53 +1,133 @@
-/* eslint-disable jsx-a11y/accessible-emoji */
-import { Link } from 'expo-router';
-import { SafeAreaView, StatusBar, Text, TouchableOpacity, View } from 'react-native';
+import { useEffect, useState } from 'react';
+import Ionicons from '@expo/vector-icons/AntDesign';
+import { router, useNavigationContainerRef } from 'expo-router';
+import { Alert, Image, View } from 'react-native';
+import { Button } from '../components/button';
+import { Card, CardFooter, CardHeader, CardTitle } from '../components/card';
+import { Input } from '../components/input';
+import { Separator } from '../components/separator';
+import { Text } from '../components/text';
+import { authClient } from '../lib/auth-client';
 
-export default function Home() {
+export default function Index() {
+  const { data: isAuthenticated } = authClient.useSession();
+  const navContainerRef = useNavigationContainerRef();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      if (navContainerRef.isReady()) {
+        router.push('/dashboard');
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuthenticated, navContainerRef.isReady()]);
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView className="flex-1 bg-slate-50">
-        <View className="flex-1 justify-between p-6">
-          <View className="mt-16 items-center">
-            <Text className="mb-2 text-2xl text-slate-600">Welcome to</Text>
-            <Text className="mb-2 text-5xl font-bold text-slate-900">PMobile 🚀</Text>
-            <Text className="text-lg font-medium text-slate-600">
-              Built with Expo Router & NativeWind
+    <Card className="z-50 mx-6 bg-gray-200/70 backdrop-blur-lg">
+      <CardHeader className="flex items-center justify-center gap-8">
+        <Image
+          source={require('../../assets/images/logo.png')}
+          style={{
+            width: 40,
+            height: 40
+          }}
+        />
+        <CardTitle>Sign In to your account</CardTitle>
+      </CardHeader>
+      <View className="flex gap-2 px-6">
+        <Button
+          onPress={() => {
+            authClient.signIn.social({
+              provider: 'google',
+              callbackURL: '/dashboard'
+            });
+          }}
+          variant="secondary"
+          className="flex flex-row items-center gap-2 bg-white/50"
+        >
+          <Ionicons name="google" size={16} />
+          <Text>Sign In with Google</Text>
+        </Button>
+        <Button
+          variant="secondary"
+          className="flex flex-row items-center gap-2 bg-white/50"
+          onPress={() => {
+            authClient.signIn.social({
+              provider: 'github',
+              callbackURL: '/dashboard'
+            });
+          }}
+        >
+          <Ionicons name="github" size={16} />
+          <Text>Sign In with GitHub</Text>
+        </Button>
+      </View>
+      <View className="my-4 w-full flex-row items-center gap-2 px-6">
+        <Separator className="w-3/12 grow" />
+        <Text>or continue with</Text>
+        <Separator className="w-3/12 grow" />
+      </View>
+      <View className="px-6">
+        <Input
+          placeholder="Email Address"
+          className="rounded-b-none border-b-0"
+          value={email}
+          onChangeText={(text) => {
+            setEmail(text);
+          }}
+        />
+        <Input
+          placeholder="Password"
+          className="rounded-t-none"
+          secureTextEntry
+          value={password}
+          onChangeText={(text) => {
+            setPassword(text);
+          }}
+        />
+      </View>
+      <CardFooter>
+        <View className="w-full">
+          <Button
+            variant="link"
+            className="w-full"
+            onPress={() => {
+              router.push('/forget-password');
+            }}
+          >
+            <Text className="text-center underline">Forget Password?</Text>
+          </Button>
+          <Button
+            onPress={() => {
+              authClient.signIn.email(
+                {
+                  email,
+                  password
+                },
+                {
+                  onError: (ctx) => {
+                    Alert.alert(ctx.error.message);
+                  }
+                }
+              );
+            }}
+          >
+            <Text>Continue</Text>
+          </Button>
+          <Text className="mt-2 text-center">
+            Don't have an account?{' '}
+            <Text
+              className="underline"
+              onPress={() => {
+                router.push('/sign-up');
+              }}
+            >
+              Create Account
             </Text>
-          </View>
-
-          <View className="flex-1 items-center justify-center">
-            <View className="mb-10 flex-row items-center rounded-xl bg-green-100 px-4 py-3">
-              <Text className="mr-3 text-xl">✅</Text>
-              <Text className="text-lg font-semibold text-green-800">
-                Expo Router + NativeWind working!
-              </Text>
-            </View>
-
-            <View className="w-full items-center">
-              <Text className="mb-6 text-xl font-semibold text-slate-700">Try Navigation</Text>
-
-              <Link href="/about" asChild>
-                <TouchableOpacity className="mb-4 w-full max-w-xs rounded-xl bg-blue-500 px-8 py-4">
-                  <Text className="text-center text-lg font-semibold text-white">
-                    Go to About Page
-                  </Text>
-                </TouchableOpacity>
-              </Link>
-
-              <TouchableOpacity className="w-full max-w-xs rounded-xl border-2 border-slate-300 px-8 py-4">
-                <Text className="text-center text-lg font-semibold text-slate-600">Stay Here</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-
-          <View className="items-center pb-5">
-            <Text className="text-center text-sm text-slate-400">
-              File-based routing • TypeScript • React Native • NativeWind
-            </Text>
-          </View>
+          </Text>
         </View>
-      </SafeAreaView>
-    </>
+      </CardFooter>
+    </Card>
   );
 }
