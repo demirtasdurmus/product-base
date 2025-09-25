@@ -7,6 +7,8 @@
     "pback:start": "infisical run --env=dev -- node apps/pback/dist/main.js",
     "pback:test": "infisical run --env=dev -- nx test pback",
     "pback:e2e": "infisical run --env=dev -- nx e2e pback-e2e",
+    "pmobile:serve:ios": "infisical run --env=dev -- nx serve pmobile --ios",
+    "pmobile:serve:android": "infisical run --env=dev -- nx serve pmobile --android",
     "generate": "nx build backend && drizzle-kit generate",
     "migrate": "nx build backend && drizzle-kit migrate",
     "prepare": "husky"
