@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "eas-build-post-install": "cd ../../ && node tools/scripts/eas-build-post-install.mjs . apps/pmobile",
-    "serve:ios": "expo start --ios",
-    "serve:android": "expo start --android",
+    "serve:ios": "expo start --ios --clear",
+    "serve:android": "expo start --android --clear",
     "android": "expo run:android",
     "ios": "expo run:ios"
   },
