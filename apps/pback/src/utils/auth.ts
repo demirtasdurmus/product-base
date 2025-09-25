@@ -7,6 +7,9 @@ import { db } from './db.js';
 export const auth = betterAuth({
   secret: config.BETTER_AUTH_SECRET,
   url: config.BETTER_AUTH_URL,
+  logger: {
+    disabled: true
+  },
   emailAndPassword: {
     enabled: true
   },
