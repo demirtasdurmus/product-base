@@ -79,7 +79,6 @@ const DialogContent = React.forwardRef<
         >
           {children}
           <DialogPrimitive.Close
-            // eslint-disable-next-line tailwindcss/classnames-order
             className={
               'web:group web:ring-offset-background web:transition-opacity web:hover:opacity-100 web:focus:outline-none web:focus:ring-2 web:focus:ring-ring web:focus:ring-offset-2 web:disabled:pointer-events-none absolute right-4 top-4 rounded-sm p-0.5 opacity-70'
             }

@@ -19,6 +19,7 @@
     "@testing-library/react-native": "*",
     "@rn-primitives/slot": "*",
     "@rn-primitives/avatar": "*",
+    "@rn-primitives/checkbox": "*",
     "@rn-primitives/dialog": "*",
     "@rn-primitives/separator": "*",
     "better-auth": "*",

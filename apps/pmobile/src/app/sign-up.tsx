@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useRouter } from 'expo-router';
 import { Alert, Image, KeyboardAvoidingView, View } from 'react-native';
 import { Button } from '../components/button';
-import { Card, CardFooter, CardHeader, CardTitle } from '../components/card';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../components/card';
 import { Input } from '../components/input';
 import { Text } from '../components/text';
 import { authClient } from '../lib/auth-client';
@@ -12,6 +12,25 @@ export default function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
+
+  const handleSignUp = () => {
+    authClient.signUp.email(
+      {
+        email,
+        password,
+        name
+      },
+      {
+        onError: (ctx) => {
+          Alert.alert(ctx.error.message);
+        },
+        onSuccess: (_ctx) => {
+          router.push('/dashboard');
+        }
+      }
+    );
+  };
+
   return (
     <Card className="z-50 mx-6">
       <CardHeader className="flex items-center justify-center gap-8">
@@ -24,7 +43,8 @@ export default function SignUp() {
         />
         <CardTitle>Create new Account</CardTitle>
       </CardHeader>
-      <View className="px-6">
+
+      <CardContent className="px-6">
         <KeyboardAvoidingView>
           <Input
             placeholder="Name"
@@ -35,6 +55,7 @@ export default function SignUp() {
             }}
           />
         </KeyboardAvoidingView>
+
         <KeyboardAvoidingView>
           <Input
             placeholder="Email"
@@ -58,31 +79,14 @@ export default function SignUp() {
             }}
           />
         </KeyboardAvoidingView>
-      </View>
+      </CardContent>
+
       <CardFooter>
         <View className="mt-2 w-full">
-          <Button
-            onPress={async () => {
-              const res = await authClient.signUp.email(
-                {
-                  email,
-                  password,
-                  name
-                },
-                {
-                  onError: (ctx) => {
-                    Alert.alert(ctx.error.message);
-                  },
-                  onSuccess: (ctx) => {
-                    router.push('/dashboard');
-                  }
-                }
-              );
-              console.log(res);
-            }}
-          >
+          <Button onPress={handleSignUp}>
             <Text>Sign Up</Text>
           </Button>
+
           <Text className="mt-2 text-center">
             Already have an account?{' '}
             <Text
