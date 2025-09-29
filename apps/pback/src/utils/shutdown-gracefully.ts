@@ -1,5 +1,6 @@
 import { Server } from 'http';
 import { pool } from './db.js';
+import { logger } from './logger.js';
 
 let isShuttingDown = false;
 
@@ -8,15 +9,15 @@ export async function shutdownGracefully(
   signalOrEvent: NodeJS.Signals | 'uncaughtException' | 'unhandledRejection'
 ) {
   if (isShuttingDown) {
-    console.log(`${signalOrEvent} received again, forcing exit`);
+    logger.warn(`${signalOrEvent} received again, forcing exit`);
     process.exit(1);
   }
 
   isShuttingDown = true;
-  console.log(`${signalOrEvent} received: starting graceful shutdown`);
+  logger.warn(`${signalOrEvent} received: starting graceful shutdown`);
 
   const shutdownTimeout = setTimeout(() => {
-    console.error('Graceful shutdown timeout, forcing exit');
+    logger.error('Graceful shutdown timeout, forcing exit');
     process.exit(1);
   }, 10000);
 
@@ -30,11 +31,11 @@ export async function shutdownGracefully(
 
     await pool.end();
 
-    console.log('Graceful shutdown completed');
+    logger.warn('Graceful shutdown completed');
     clearTimeout(shutdownTimeout);
     process.exit(0);
   } catch (error) {
-    console.error('Error during graceful shutdown:', error);
+    logger.error(error, 'Error during graceful shutdown');
     clearTimeout(shutdownTimeout);
     process.exit(1);
   }

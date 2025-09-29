@@ -4,6 +4,7 @@ import { config } from './config/index.js';
 
 import { createServer } from 'http';
 import { app } from './app.js';
+import { logger } from './utils/logger.js';
 import { shutdownGracefully } from './utils/shutdown-gracefully.js';
 
 const host = config.PBACK_HOST;
@@ -12,22 +13,22 @@ const port = config.PBACK_PORT;
 const server = createServer(app);
 
 server.listen(port, host, () => {
-  console.log(`[ ready ] http://${host}:${port}`);
+  logger.info(`[ ready ] http://${host}:${port}`);
 });
 
 server.on('error', (error) => {
-  console.error(`[ error ] ${error.message}`);
+  logger.error(error);
 });
 
 process.on('SIGINT', () => shutdownGracefully(server, 'SIGINT'));
 process.on('SIGTERM', () => shutdownGracefully(server, 'SIGTERM'));
 
 process.on('uncaughtException', (error) => {
-  console.error('Uncaught Exception:', error);
+  logger.error(error, 'Uncaught Exception');
   shutdownGracefully(server, 'uncaughtException');
 });
 
 process.on('unhandledRejection', (reason, promise) => {
-  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+  logger.error(reason, 'Unhandled Rejection at:', promise);
   shutdownGracefully(server, 'unhandledRejection');
 });
