@@ -1,33 +1,60 @@
-import { useEffect, useState } from 'react';
-import { Redirect, router, useNavigationContainerRef } from 'expo-router';
-import { ActivityIndicator, Alert, Image, View } from 'react-native';
+import { useEffect } from 'react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { router, useNavigationContainerRef } from 'expo-router';
+import { Controller, FieldErrors, useForm } from 'react-hook-form';
+import { ActivityIndicator, Alert, Image, KeyboardAvoidingView, View } from 'react-native';
+import { z } from 'zod';
 import { Button } from '../components/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../components/card';
 import { Checkbox } from '../components/checkbox';
 import { Input } from '../components/input';
 import { Text } from '../components/text';
 import { authClient } from '../lib/auth-client';
+import { formatFormErrors } from '../lib/utils';
+
+const signInSchema = z.object({
+  email: z.email({ message: 'Please enter a valid email' }),
+  password: z.string().min(1, { message: 'Password is required' }),
+  rememberMe: z.boolean().optional()
+});
+
+type SignInFormData = z.infer<typeof signInSchema>;
 
 export default function Index() {
   const { data: isAuthenticated, isPending } = authClient.useSession();
   const navContainerRef = useNavigationContainerRef();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [rememberMe, setRememberMe] = useState(false);
 
-  const handleSignIn = () => {
+  const {
+    control,
+    handleSubmit,
+    formState: { isSubmitting }
+  } = useForm<SignInFormData>({
+    resolver: zodResolver(signInSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+      rememberMe: false
+    }
+  });
+
+  const onValidSubmit = (data: SignInFormData) => {
     authClient.signIn.email(
       {
-        email,
-        password,
-        rememberMe
+        email: data.email,
+        password: data.password,
+        rememberMe: data.rememberMe || false
       },
       {
         onError: (ctx) => {
-          Alert.alert(ctx.error.message);
+          Alert.alert('Sign In Error', ctx.error.message);
         }
       }
     );
+  };
+
+  const onInvalidSubmit = (errors: FieldErrors<SignInFormData>) => {
+    const formattedErrors = formatFormErrors(errors);
+    Alert.alert('Validation Error', formattedErrors);
   };
 
   useEffect(() => {
@@ -41,9 +68,6 @@ export default function Index() {
 
   if (isPending) {
     return <ActivityIndicator />;
-  }
-  if (isAuthenticated) {
-    return <Redirect href="/dashboard" />;
   }
 
   return (
@@ -61,31 +85,49 @@ export default function Index() {
 
       <CardContent className="gap-2 px-6">
         <View>
-          <Input
-            placeholder="Email Address"
-            className="rounded-b-none border-b-0"
-            value={email}
-            onChangeText={(text) => {
-              setEmail(text);
-            }}
-          />
-          <Input
-            placeholder="Password"
-            className="rounded-t-none"
-            secureTextEntry
-            value={password}
-            onChangeText={(text) => {
-              setPassword(text);
-            }}
-          />
+          <KeyboardAvoidingView>
+            <Controller
+              control={control}
+              name="email"
+              render={({ field: { onChange, onBlur, value } }) => (
+                <Input
+                  placeholder="Email Address"
+                  className="rounded-b-none border-b-0"
+                  value={value}
+                  onChangeText={onChange}
+                  onBlur={onBlur}
+                  autoCapitalize="none"
+                  keyboardType="email-address"
+                />
+              )}
+            />
+          </KeyboardAvoidingView>
+
+          <KeyboardAvoidingView>
+            <Controller
+              control={control}
+              name="password"
+              render={({ field: { onChange, onBlur, value } }) => (
+                <Input
+                  placeholder="Password"
+                  className="rounded-t-none"
+                  secureTextEntry
+                  value={value}
+                  onChangeText={onChange}
+                  onBlur={onBlur}
+                />
+              )}
+            />
+          </KeyboardAvoidingView>
         </View>
 
         <View className="flex-row items-center gap-2">
-          <Checkbox
-            checked={rememberMe}
-            onCheckedChange={() => {
-              setRememberMe(!rememberMe);
-            }}
+          <Controller
+            control={control}
+            name="rememberMe"
+            render={({ field: { onChange, value } }) => (
+              <Checkbox checked={value || false} onCheckedChange={onChange} />
+            )}
           />
           <Text>Remember me</Text>
         </View>
@@ -103,7 +145,7 @@ export default function Index() {
             <Text className="text-center underline">Forget Password?</Text>
           </Button>
 
-          <Button onPress={handleSignIn}>
+          <Button onPress={handleSubmit(onValidSubmit, onInvalidSubmit)} disabled={isSubmitting}>
             <Text>Continue</Text>
           </Button>
 

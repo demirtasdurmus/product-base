@@ -1,34 +1,64 @@
-import { useState } from 'react';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'expo-router';
+import { Controller, FieldErrors, useForm } from 'react-hook-form';
 import { Alert, Image, KeyboardAvoidingView, View } from 'react-native';
+import { z } from 'zod';
 import { Button } from '../components/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../components/card';
 import { Input } from '../components/input';
 import { Text } from '../components/text';
 import { authClient } from '../lib/auth-client';
+import { formatFormErrors } from '../lib/utils';
+
+const signUpSchema = z.object({
+  name: z
+    .string({ error: 'Name is required' })
+    .min(2, { message: 'Name must be at least 2 characters' }),
+  email: z.email({ error: 'Please enter a valid email' }),
+  password: z
+    .string({ error: 'Password is required' })
+    .min(6, 'Password must be at least 6 characters')
+});
+
+type SignUpFormData = z.infer<typeof signUpSchema>;
 
 export default function SignUp() {
   const router = useRouter();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
 
-  const handleSignUp = () => {
+  const {
+    control,
+    handleSubmit,
+    formState: { isSubmitting }
+  } = useForm<SignUpFormData>({
+    resolver: zodResolver(signUpSchema),
+    defaultValues: {
+      name: '',
+      email: '',
+      password: ''
+    }
+  });
+
+  const onValidSubmit = (data: SignUpFormData) => {
     authClient.signUp.email(
       {
-        email,
-        password,
-        name
+        email: data.email,
+        password: data.password,
+        name: data.name
       },
       {
         onError: (ctx) => {
-          Alert.alert(ctx.error.message);
+          Alert.alert('Sign Up Error', ctx.error.message);
         },
         onSuccess: (_ctx) => {
           router.push('/dashboard');
         }
       }
     );
+  };
+
+  const onInvalidSubmit = (errors: FieldErrors<SignUpFormData>) => {
+    const formattedErrors = formatFormErrors(errors);
+    Alert.alert('Validation Error', formattedErrors);
   };
 
   return (
@@ -46,44 +76,60 @@ export default function SignUp() {
 
       <CardContent className="px-6">
         <KeyboardAvoidingView>
-          <Input
-            placeholder="Name"
-            className="rounded-b-none border-b-0"
-            value={name}
-            onChangeText={(text) => {
-              setName(text);
-            }}
+          <Controller
+            control={control}
+            name="name"
+            render={({ field: { onChange, onBlur, value } }) => (
+              <Input
+                placeholder="Name"
+                className="rounded-b-none border-b-0"
+                value={value}
+                onChangeText={onChange}
+                onBlur={onBlur}
+              />
+            )}
           />
         </KeyboardAvoidingView>
 
         <KeyboardAvoidingView>
-          <Input
-            placeholder="Email"
-            className="rounded-b-none border-b-0"
-            value={email}
-            onChangeText={(text) => {
-              setEmail(text);
-            }}
-            autoCapitalize="none"
+          <Controller
+            control={control}
+            name="email"
+            render={({ field: { onChange, onBlur, value } }) => (
+              <Input
+                placeholder="Email"
+                value={value}
+                onChangeText={onChange}
+                className="rounded-b-none rounded-t-none border-b-0"
+                onBlur={onBlur}
+                autoCapitalize="none"
+                keyboardType="email-address"
+              />
+            )}
           />
         </KeyboardAvoidingView>
 
         <KeyboardAvoidingView>
-          <Input
-            placeholder="Password"
-            secureTextEntry
-            className="rounded-t-none"
-            value={password}
-            onChangeText={(text) => {
-              setPassword(text);
-            }}
+          <Controller
+            control={control}
+            name="password"
+            render={({ field: { onChange, onBlur, value } }) => (
+              <Input
+                placeholder="Password"
+                className="rounded-t-none"
+                secureTextEntry
+                value={value}
+                onChangeText={onChange}
+                onBlur={onBlur}
+              />
+            )}
           />
         </KeyboardAvoidingView>
       </CardContent>
 
       <CardFooter>
         <View className="mt-2 w-full">
-          <Button onPress={handleSignUp}>
+          <Button onPress={handleSubmit(onValidSubmit, onInvalidSubmit)} disabled={isSubmitting}>
             <Text>Sign Up</Text>
           </Button>
 

@@ -1,7 +1,9 @@
-import { useState } from 'react';
 import Icons from '@expo/vector-icons/AntDesign';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { router } from 'expo-router';
-import { View } from 'react-native';
+import { Controller, FieldErrors, useForm } from 'react-hook-form';
+import { Alert, KeyboardAvoidingView, View } from 'react-native';
+import { z } from 'zod';
 import { Button } from '../components/button';
 import {
   Card,
@@ -14,15 +16,36 @@ import {
 import { Input } from '../components/input';
 import { Text } from '../components/text';
 import { authClient } from '../lib/auth-client';
+import { formatFormErrors } from '../lib/utils';
+
+const forgetPasswordSchema = z.object({
+  email: z.email({ message: 'Please enter a valid email' })
+});
+
+type ForgetPasswordFormData = z.infer<typeof forgetPasswordSchema>;
 
 export default function RequestPasswordReset() {
-  const [email, setEmail] = useState('');
+  const {
+    control,
+    handleSubmit,
+    formState: { isSubmitting }
+  } = useForm<ForgetPasswordFormData>({
+    resolver: zodResolver(forgetPasswordSchema),
+    defaultValues: {
+      email: ''
+    }
+  });
 
-  const handleRequestPasswordReset = () => {
+  const onValidSubmit = (data: ForgetPasswordFormData) => {
     authClient.requestPasswordReset({
-      email,
+      email: data.email,
       redirectTo: '/reset-password'
     });
+  };
+
+  const onInvalidSubmit = (errors: FieldErrors<ForgetPasswordFormData>) => {
+    const formattedErrors = formatFormErrors(errors);
+    Alert.alert('Validation Error', formattedErrors);
   };
 
   return (
@@ -33,17 +56,32 @@ export default function RequestPasswordReset() {
       </CardHeader>
 
       <CardContent className="mb-2 px-6">
-        <Input
-          autoCapitalize="none"
-          placeholder="Email"
-          value={email}
-          onChangeText={(text) => setEmail(text)}
-        />
+        <KeyboardAvoidingView>
+          <Controller
+            control={control}
+            name="email"
+            render={({ field: { onChange, onBlur, value } }) => (
+              <Input
+                autoCapitalize="none"
+                placeholder="Email"
+                value={value}
+                onChangeText={onChange}
+                onBlur={onBlur}
+                keyboardType="email-address"
+              />
+            )}
+          />
+        </KeyboardAvoidingView>
       </CardContent>
 
       <CardFooter>
         <View className="w-full gap-2">
-          <Button onPress={handleRequestPasswordReset} className="w-full" variant="default">
+          <Button
+            onPress={handleSubmit(onValidSubmit, onInvalidSubmit)}
+            className="w-full"
+            variant="default"
+            disabled={isSubmitting}
+          >
             <Text>Send Email</Text>
           </Button>
 
