@@ -19,7 +19,7 @@
     "name": "backend"
   },
   "dependencies": {
-    "tslib": "^2.3.0",
-    "drizzle-orm": "^0.44.5"
+    "tslib": "*",
+    "drizzle-orm": "*"
   }
 }

@@ -5,22 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1758523438649,
-      "tag": "0000_cultured_sandman",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1758524934707,
-      "tag": "0001_daily_gorgon",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1759644993986,
-      "tag": "0002_gifted_scream",
+      "when": 1759647834933,
+      "tag": "0000_funny_malice",
       "breakpoints": true
     }
   ]

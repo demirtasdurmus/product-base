@@ -21,6 +21,11 @@ export const auth = betterAuth({
     provider: 'pg',
     schema: models
   }),
+  advanced: {
+    database: {
+      useNumberId: true
+    }
+  },
   /**
    * @see https://github.com/better-auth/better-auth/issues/1974
    */
