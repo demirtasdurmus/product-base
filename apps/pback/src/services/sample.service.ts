@@ -1,4 +1,4 @@
-import { eq, sql } from 'drizzle-orm';
+import { count, eq, sql } from 'drizzle-orm';
 import { models } from '@product-base/backend';
 import { generateRandomString } from '@product-base/shared';
 import { db } from '../utils/db.js';
@@ -39,7 +39,7 @@ export async function getSamples(page?: number, limit?: number) {
     limit = 10;
   }
 
-  const samples = await db
+  const samplesPromise = db
     .select({
       id: models.sample.id,
       name: models.sample.name,
@@ -49,9 +49,13 @@ export async function getSamples(page?: number, limit?: number) {
     .from(models.sample)
     .limit(limit)
     .offset((page - 1) * limit);
+
+  const totalPromise = db.select({ count: count() }).from(models.sample);
+  const [samples, [{ count: total }]] = await Promise.all([samplesPromise, totalPromise]);
+
   return {
     samples,
-    total: samples.length,
+    total,
     page,
     limit
   };

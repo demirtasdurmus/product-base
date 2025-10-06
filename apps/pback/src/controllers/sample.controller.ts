@@ -44,10 +44,9 @@ export const getSamplesController: RequestHandler<
   unknown,
   GetSamplesResponseBody,
   unknown,
-  unknown
-> = async (_req, res) => {
-  const q = res.locals.query as GetSamplesRequestQuery;
-  const samples = await getSamples(q.page, q.limit);
+  GetSamplesRequestQuery
+> = async (req, res) => {
+  const samples = await getSamples(req.query?.page, req.query?.limit);
   res.status(200).send(samples);
 };
 
