@@ -14,4 +14,4 @@ export type GetSamplesResponseBody = {
   limit: number;
 };
 export type UpdateSampleResponseBody = Sample;
-export type DeleteSampleResponseBody = void;
+export type DeleteSampleResponseBody = null;

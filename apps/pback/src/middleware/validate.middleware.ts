@@ -1,5 +1,6 @@
 import { RequestHandler } from 'express';
 import { z } from 'zod';
+import { UnprocessableEntityError } from '@product-base/backend';
 
 type TValidationMap = 'params' | 'query' | 'body';
 type TValidateOptions<T> = {
@@ -8,12 +9,13 @@ type TValidateOptions<T> = {
 };
 
 export function validate<T>({ validationMap, schema }: TValidateOptions<T>): RequestHandler {
-  return (req, res, next) => {
+  return (req, _res, next) => {
     const parsed = schema.safeParse(req[validationMap]);
 
     if (parsed.error) {
-      res.status(400).json(parsed.error);
-      return;
+      throw new UnprocessableEntityError('Validation failed', {
+        issues: parsed.error.issues
+      });
     }
 
     if (parsed.data) {

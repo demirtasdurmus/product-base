@@ -1,12 +1,11 @@
-/**
- * Test compound services that uses shared utilities here if needed
- */
-describe('Sample Service', () => {
-  describe('sample', () => {
-    it('should pass', async () => {
-      const result = true;
+import { sampleService } from './sample.service.js';
 
-      expect(result).toBe(true);
+describe('Sample Service', () => {
+  describe('sampleService', () => {
+    it('should pass', async () => {
+      const result = sampleService();
+
+      expect(result).toBe('sampleService');
     });
   });
 });

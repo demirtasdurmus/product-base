@@ -20,6 +20,8 @@
   },
   "dependencies": {
     "tslib": "*",
-    "drizzle-orm": "*"
+    "drizzle-orm": "*",
+    "http-status": "*",
+    "@product-base/shared": "*"
   }
 }

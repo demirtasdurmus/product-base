@@ -1,9 +1,9 @@
 import { RequestHandler } from 'express';
+import { UnauthorizedError } from '@product-base/backend';
 
-export const protect: RequestHandler = (req, res, next) => {
+export const protect: RequestHandler = (req, _res, next) => {
   if (!req.user && !req.session) {
-    res.status(401).json({ message: 'Unauthorized' });
-    return;
+    throw new UnauthorizedError('Authentication required to access this resource');
   }
   next();
 };

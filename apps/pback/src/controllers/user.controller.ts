@@ -1,6 +1,13 @@
 import { User } from 'better-auth';
 import { RequestHandler } from 'express';
+import { ServerResponse } from '@product-base/shared';
+import { sendSuccessResponse } from '../utils/send-response.js';
 
-export const getMe: RequestHandler<unknown, User | null, unknown, unknown> = (req, res) => {
-  res.status(200).send(req.user);
+export const getMe: RequestHandler<
+  unknown,
+  ServerResponse<User> | ServerResponse,
+  unknown,
+  unknown
+> = (req, res) => {
+  return sendSuccessResponse({ res, statusCode: 200, payload: req.user });
 };

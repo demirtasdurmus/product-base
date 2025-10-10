@@ -3,9 +3,9 @@ import { pinoHttp } from 'pino-http';
 import { config } from '../config/index.js';
 import { logger } from '../utils/logger.js';
 
-const isDevelopment = config.NODE_ENV === 'development';
+const isDevLike = ['development', 'test'].includes(config.NODE_ENV);
 
-export const httpLogger = isDevelopment
+export const httpLogger = isDevLike
   ? devHttpLogger
   : pinoHttp({
       logger,
@@ -15,10 +15,11 @@ export const httpLogger = isDevelopment
         if (req.url?.includes('/health')) return 'debug';
         return 'info';
       },
-      customProps: (req: Request, _res) => {
+      customProps: (req: Request, res: Response) => {
         const props = {
           session: req?.session?.id,
-          user: req?.user?.id
+          user: req?.user?.id,
+          error: res.locals?.error
         };
         return props;
       }
@@ -39,9 +40,9 @@ function devHttpLogger(req: Request, res: Response, next: NextFunction): void {
     const message = `${method} ${url} - ${status} (${duration}ms)`;
 
     if (status >= 500) {
-      logger.error(message);
+      logger.error({ error: res.locals?.error }, message);
     } else if (status >= 400) {
-      logger.warn(message);
+      logger.warn({ error: res.locals?.error }, message);
     } else {
       logger.info(message);
     }
