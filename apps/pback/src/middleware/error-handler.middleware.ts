@@ -2,7 +2,7 @@ import { ErrorRequestHandler } from 'express';
 import { BaseError, InternalServerError, isBaseError } from '@product-base/backend';
 import { ErrorResponseDetails, ServerResponse } from '@product-base/shared';
 import { config } from '../config/index.js';
-import { sendErrorResponse } from '../utils/send-response.js';
+import { sendErrorResponse } from '../utils/send-error-response.js';
 
 export const errorHandler: ErrorRequestHandler<
   unknown,

@@ -16,7 +16,7 @@ import {
   UpdateSampleResponseBody
 } from '@product-base/shared';
 import { db } from '../utils/db.js';
-import { sendSuccessResponse } from '../utils/send-response.js';
+import { sendSuccessResponse } from '../utils/send-success-response.js';
 
 export const createSampleController: RequestHandler<
   unknown,
@@ -69,6 +69,7 @@ export const getSamplesController: RequestHandler<
   GetSamplesRequestQuery
 > = async (req, res) => {
   const { page = 1, limit = 10 } = req.query as GetSamplesRequestQuery;
+
   const samplesPromise = db
     .select({
       id: models.sample.id,
