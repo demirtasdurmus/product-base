@@ -5,7 +5,7 @@ import { config } from './config/index.js';
 import { createServer } from 'http';
 import { app } from './app.js';
 import { logger } from './utils/logger.js';
-import { shutdownGracefully } from './utils/shutdown-gracefully.js';
+import { shutdownGracefully } from './utils/server-utils/shutdown-gracefully.js';
 
 const host = config.PBACK_HOST;
 const port = config.PBACK_PORT;

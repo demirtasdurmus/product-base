@@ -5,7 +5,6 @@ import {
   CreateSampleRequestBody,
   CreateSampleResponseBody,
   DeleteSampleRequestParams,
-  generateRandomString,
   GetSampleRequestParams,
   GetSampleResponseBody,
   GetSamplesRequestQuery,
@@ -16,7 +15,7 @@ import {
   UpdateSampleResponseBody
 } from '@product-base/shared';
 import { db } from '../utils/db.js';
-import { sendSuccessResponse } from '../utils/send-success-response.js';
+import { sendSuccessResponse } from '../utils/server-utils/send-success-response.js';
 
 export const createSampleController: RequestHandler<
   unknown,
@@ -26,9 +25,7 @@ export const createSampleController: RequestHandler<
 > = async (req, res) => {
   const [sample] = await db
     .insert(models.sample)
-    .values({
-      name: generateRandomString(req.body?.length)
-    })
+    .values({ name: req.body.name })
     .returning({
       id: models.sample.id,
       name: models.sample.name,

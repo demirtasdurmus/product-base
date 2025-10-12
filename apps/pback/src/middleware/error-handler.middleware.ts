@@ -1,8 +1,8 @@
 import { ErrorRequestHandler } from 'express';
-import { BaseError, InternalServerError, isBaseError } from '@product-base/backend';
 import { ErrorResponseDetails, ServerResponse } from '@product-base/shared';
 import { config } from '../config/index.js';
-import { sendErrorResponse } from '../utils/send-error-response.js';
+import { sendErrorResponse } from '../utils/server-utils/send-error-response.js';
+import { serializeError } from '../utils/server-utils/serialize-error.js';
 
 export const errorHandler: ErrorRequestHandler<
   unknown,
@@ -12,9 +12,6 @@ export const errorHandler: ErrorRequestHandler<
 > = (err, _req, res, _next) => {
   const error = serializeError(err);
 
-  /**
-   * Write the error to the response locals for logging purposes
-   */
   res.locals.error = error;
 
   return sendErrorResponse({
@@ -23,23 +20,3 @@ export const errorHandler: ErrorRequestHandler<
     isProdLikeEnvironment: config.NODE_ENV === 'production'
   });
 };
-
-export function serializeError(err: unknown): BaseError {
-  let error: BaseError;
-
-  if (isBaseError(err)) {
-    error = err;
-  } else if (err instanceof Error) {
-    error = new InternalServerError(
-      err.message,
-      {
-        stack: err.stack
-      },
-      false
-    );
-  } else {
-    error = new InternalServerError('An unexpected error occurred', { originalError: err }, false);
-  }
-
-  return error;
-}

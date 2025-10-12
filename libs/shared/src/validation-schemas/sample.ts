@@ -5,7 +5,7 @@ const sampleRequestParamsSchema = z.object({
 });
 
 export const createSampleRequestBodySchema = z.object({
-  length: z.number().min(1).max(34).optional()
+  name: z.string().min(1).max(255)
 });
 
 export const getSampleRequestParamsSchema = sampleRequestParamsSchema;

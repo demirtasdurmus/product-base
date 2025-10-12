@@ -1,6 +1,6 @@
 import { Server } from 'http';
-import { pool } from './db.js';
-import { logger } from './logger.js';
+import { pool } from '../db.js';
+import { logger } from '../logger.js';
 
 let isShuttingDown = false;
 
