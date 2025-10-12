@@ -1,14 +1,11 @@
-/* This order should be respected for environment variables validation */
-/* prettier-ignore */
-import { config } from './config/index.js';
-
 import { createServer } from 'http';
 import { app } from './app.js';
+import { env } from './env/index.js';
 import { logger } from './utils/logger.js';
 import { shutdownGracefully } from './utils/server-utils/shutdown-gracefully.js';
 
-const host = config.PBACK_HOST;
-const port = config.PBACK_PORT;
+const host = env.PBACK_HOST;
+const port = env.PBACK_PORT;
 
 const server = createServer(app);
 

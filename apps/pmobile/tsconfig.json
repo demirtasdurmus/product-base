@@ -4,6 +4,9 @@
   "include": [".expo/types/**/*.ts", "expo-env.d.ts", "nativewind-env.d.ts"],
   "references": [
     {
+      "path": "../../libs/shared"
+    },
+    {
       "path": "./tsconfig.app.json"
     },
     {

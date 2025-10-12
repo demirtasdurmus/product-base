@@ -1,6 +1,7 @@
 import { RequestHandler } from 'express';
 import { z } from 'zod';
-import { UnprocessableEntityError } from '@product-base/backend';
+import { fromZodIssueToBaseErrorIssue, UnprocessableEntityError } from '@product-base/backend';
+import { parseObjectWithZod } from '@product-base/shared';
 
 type TValidationMap = 'params' | 'query' | 'body';
 type TValidateOptions<T> = {
@@ -9,30 +10,29 @@ type TValidateOptions<T> = {
 };
 
 export function validate<T>({ validationMap, schema }: TValidateOptions<T>): RequestHandler {
-  return (req, _res, next) => {
-    const parsed = schema.safeParse(req[validationMap]);
-
-    if (parsed.error) {
-      throw new UnprocessableEntityError('Validation failed', {
-        issues: parsed.error.issues
-      });
-    }
-
-    if (parsed.data) {
-      if (validationMap === 'query') {
-        /**
-         * Express 5: req.query is a getter; use this hack to modify it
-         * @see https://stackoverflow.com/questions/79597051/express-v5-is-there-any-way-to-modify-req-query
-         */
-        Object.defineProperty(req, 'query', {
-          ...Object.getOwnPropertyDescriptor(req, 'query'),
-          value: req.query,
-          writable: true
+  return (req, _res, next) =>
+    parseObjectWithZod({
+      object: req[validationMap],
+      schema,
+      onError: (error) => {
+        throw new UnprocessableEntityError('Validation failed', {
+          issues: error.issues.map(fromZodIssueToBaseErrorIssue)
         });
+      },
+      onSuccess: (data) => {
+        if (validationMap === 'query') {
+          /**
+           * Express 5: req.query is a getter; use this hack to modify it
+           * @see https://stackoverflow.com/questions/79597051/express-v5-is-there-any-way-to-modify-req-query
+           */
+          Object.defineProperty(req, 'query', {
+            ...Object.getOwnPropertyDescriptor(req, 'query'),
+            value: req.query,
+            writable: true
+          });
+        }
+        req[validationMap] = data;
+        next();
       }
-      req[validationMap] = parsed.data;
-    }
-
-    return next();
-  };
+    });
 }

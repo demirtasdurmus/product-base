@@ -1,8 +1,8 @@
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { Pool } from 'pg';
-import { config } from '../config/index.js';
+import { env } from '../env/index.js';
 
 export const pool = new Pool({
-  connectionString: config.DATABASE_URL
+  connectionString: env.DATABASE_URL
 });
 export const db = drizzle({ client: pool });

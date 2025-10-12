@@ -1,9 +1,19 @@
-import { $ZodIssue } from 'zod/v4/core';
+export type BaseErrorIssue = {
+  field?: string;
+  detail?: string;
+};
 
 export type BaseErrorData = {
-  issues?: $ZodIssue[] | Record<string, unknown>[];
+  issues?: BaseErrorIssue[];
   stack?: string;
   originalError?: unknown;
+};
+
+export type DatabaseErrorCause = {
+  code: string;
+  constraint?: string;
+  detail?: string;
+  column?: string;
 };
 
 export type ErrorResponseDetails = {

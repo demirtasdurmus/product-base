@@ -3,28 +3,20 @@ import {
   BadRequestError,
   BaseError,
   ConflictError,
+  fromDatabaseErrorCauseToBaseErrorIssue,
   InternalServerError,
   isBaseError,
   isDrizzleError,
   isDrizzleQueryError,
-  isNativeError,
-  isTransactionRollbackError
+  isNativeError
 } from '@product-base/backend';
+import { DatabaseErrorCause } from '@product-base/shared';
 
 export function serializeError(err: unknown): BaseError {
   let error: BaseError;
 
   if (isBaseError(err)) {
     error = err;
-  } else if (isTransactionRollbackError(err)) {
-    error = new InternalServerError(
-      err.message,
-      {
-        stack: err.stack,
-        originalError: err
-      },
-      false
-    );
   } else if (isDrizzleQueryError(err)) {
     error = serializeDrizzleQueryError(err);
   } else if (isDrizzleError(err)) {
@@ -58,77 +50,32 @@ export function serializeError(err: unknown): BaseError {
 function serializeDrizzleQueryError(err: DrizzleQueryError): BaseError {
   // Check if we have a cause with error code (PostgreSQL error)
   if (err.cause && typeof err.cause === 'object' && 'code' in err.cause) {
-    const cause = err.cause as {
-      code: string;
-      constraint?: string;
-      detail?: string;
-      column?: string;
-    };
+    const cause = err.cause as DatabaseErrorCause;
 
     switch (cause.code) {
       case '23505': // Unique constraint violation
         return new ConflictError('A record with this value already exists', {
-          issues: [
-            {
-              constraint: cause.constraint,
-              detail: cause.detail,
-              code: cause.code,
-              column: cause.column,
-              type: 'unique_constraint_violation'
-            }
-          ]
+          issues: [fromDatabaseErrorCauseToBaseErrorIssue(cause)]
         });
 
       case '23503': // Foreign key constraint violation
         return new BadRequestError('Referenced record does not exist', {
-          issues: [
-            {
-              constraint: cause.constraint,
-              detail: cause.detail,
-              code: cause.code,
-              column: cause.column,
-              type: 'foreign_key_violation'
-            }
-          ]
+          issues: [fromDatabaseErrorCauseToBaseErrorIssue(cause)]
         });
 
       case '23502': // Not null constraint violation
         return new BadRequestError('Required field cannot be null', {
-          issues: [
-            {
-              constraint: cause.constraint,
-              detail: cause.detail,
-              code: cause.code,
-              column: cause.column,
-              type: 'not_null_violation'
-            }
-          ]
+          issues: [fromDatabaseErrorCauseToBaseErrorIssue(cause)]
         });
 
       case '23514': // Check constraint violation
         return new BadRequestError('Value violates check constraint', {
-          issues: [
-            {
-              constraint: cause.constraint,
-              detail: cause.detail,
-              code: cause.code,
-              column: cause.column,
-              type: 'check_constraint_violation'
-            }
-          ]
+          issues: [fromDatabaseErrorCauseToBaseErrorIssue(cause)]
         });
 
       case '23506': // Exclusion constraint violation
         return new ConflictError('Value violates exclusion constraint', {
-          issues: [
-            {
-              constraint: cause.constraint,
-              detail: cause.detail,
-              code: cause.code,
-              column: cause.column,
-              type: 'exclusion_constraint_violation'
-            }
-          ]
+          issues: [fromDatabaseErrorCauseToBaseErrorIssue(cause)]
         });
 
       default:

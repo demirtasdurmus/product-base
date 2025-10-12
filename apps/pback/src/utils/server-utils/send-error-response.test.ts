@@ -90,7 +90,7 @@ describe('sendErrorResponse', () => {
 
   it('should send 5xx error response with generic message in production', () => {
     const error = new InternalServerError('Sensitive internal error details', {
-      issues: [{ field: 'secret', message: 'sensitive data' }]
+      issues: [{ field: 'secret', detail: 'sensitive data' }]
     });
 
     sendErrorResponse({
@@ -106,7 +106,7 @@ describe('sendErrorResponse', () => {
         name: 'INTERNAL_SERVER_ERROR',
         statusCode: 500,
         message: 'An unexpected error occurred. Please try again later.',
-        issues: [{ field: 'secret', message: 'sensitive data' }]
+        issues: [{ field: 'secret', detail: 'sensitive data' }]
       }
     });
   });
@@ -114,8 +114,8 @@ describe('sendErrorResponse', () => {
   it('should include error data when present for 4xx errors', () => {
     const errorData = {
       issues: [
-        { field: 'email', message: 'Email must be valid format' },
-        { field: 'password', message: 'Password too weak' }
+        { field: 'email', detail: 'Email must be valid format' },
+        { field: 'password', detail: 'Password too weak' }
       ]
     };
     const error = new UnprocessableEntityError('Validation failed', errorData);
@@ -133,8 +133,8 @@ describe('sendErrorResponse', () => {
         statusCode: 422,
         message: 'Validation failed',
         issues: [
-          { field: 'email', message: 'Email must be valid format' },
-          { field: 'password', message: 'Password too weak' }
+          { field: 'email', detail: 'Email must be valid format' },
+          { field: 'password', detail: 'Password too weak' }
         ]
       }
     });
@@ -169,7 +169,7 @@ describe('sendErrorResponse', () => {
     const errorData = {
       originalError: 'SELECT * FROM sensitive_table',
       stack: 'sensitive stack trace',
-      issues: [{ field: 'visible', message: 'this will be visible' }]
+      issues: [{ field: 'visible', detail: 'this will be visible' }]
     };
     const error = new InternalServerError('Query failed', errorData);
 
@@ -312,8 +312,8 @@ describe('sendErrorResponse', () => {
   it('should handle complex nested error data', () => {
     const complexData = {
       issues: [
-        { field: 'email', message: 'Invalid format' },
-        { field: 'password', message: 'Too weak' }
+        { field: 'email', detail: 'Invalid format' },
+        { field: 'password', detail: 'Too weak' }
       ],
       originalError: 'Validation pipeline failed'
     };

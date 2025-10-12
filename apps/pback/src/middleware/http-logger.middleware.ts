@@ -1,29 +1,34 @@
-import { NextFunction, Request, Response } from 'express';
+import { NextFunction, Request, RequestHandler, Response } from 'express';
 import { pinoHttp } from 'pino-http';
-import { config } from '../config/index.js';
 import { logger } from '../utils/logger.js';
 
-const isDevLike = ['development', 'test'].includes(config.NODE_ENV);
-
-export const httpLogger = isDevLike
-  ? devHttpLogger
-  : pinoHttp({
-      logger,
-      customLogLevel: (req, res, err) => {
-        if (res.statusCode >= 400 && res.statusCode < 500) return 'warn';
-        if (res.statusCode >= 500 || err) return 'error';
-        if (req.url?.includes('/health')) return 'debug';
-        return 'info';
-      },
-      customProps: (req: Request, res: Response) => {
-        const props = {
-          session: req?.session?.id,
-          user: req?.user?.id,
-          error: res.locals?.error
-        };
-        return props;
-      }
-    });
+export function httpLogger({
+  isProdLikeEnvironment,
+  skipPaths
+}: {
+  isProdLikeEnvironment: boolean;
+  skipPaths?: string[];
+}): RequestHandler {
+  return isProdLikeEnvironment
+    ? pinoHttp({
+        logger,
+        customLogLevel: (req, res, err) => {
+          if (skipPaths?.some((path) => req.url?.includes(path))) return 'debug';
+          if (res.statusCode >= 400 && res.statusCode < 500) return 'warn';
+          if (res.statusCode >= 500 || err) return 'error';
+          return 'info';
+        },
+        customProps: (req: Request, res: Response) => {
+          const props = {
+            session: req?.session?.id,
+            user: req?.user?.id,
+            error: res.locals?.error
+          };
+          return props;
+        }
+      })
+    : devHttpLogger;
+}
 
 /**
  * Simple development HTTP logger

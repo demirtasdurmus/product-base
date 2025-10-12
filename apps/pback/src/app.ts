@@ -7,10 +7,11 @@ import { notFoundHandler } from './middleware/not-found-handler.middleware.js';
 import { sampleRouter } from './routers/sample.router.js';
 import { userRouter } from './routers/user.router.js';
 import { auth } from './utils/auth.js';
+import { isProdLikeEnvironment } from './utils/server-utils/index.js';
 
 const app: Application = express();
 
-app.use(httpLogger);
+app.use(httpLogger({ isProdLikeEnvironment, skipPaths: ['/health'] }));
 
 app.use(helmet());
 

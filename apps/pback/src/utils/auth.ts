@@ -2,15 +2,15 @@ import { expo } from '@better-auth/expo';
 import { betterAuth, BetterAuthPlugin } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 import { models } from '@product-base/backend';
-import { config } from '../config/index.js';
+import { env } from '../env/index.js';
 import { db } from './db.js';
 
 /**
  * @see https://www.better-auth.com/docs/integrations/express
  */
 export const auth = betterAuth({
-  secret: config.BETTER_AUTH_SECRET,
-  url: config.BETTER_AUTH_URL,
+  secret: env.BETTER_AUTH_SECRET,
+  url: env.BETTER_AUTH_URL,
   logger: {
     disabled: true
   },

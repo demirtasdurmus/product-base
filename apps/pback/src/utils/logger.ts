@@ -1,34 +1,33 @@
 import { readFileSync } from 'node:fs';
 import appRoot from 'app-root-path';
 import pino from 'pino';
-import { config } from '../config/index.js';
+import { env } from '../env/index.js';
+import { isProdLikeEnvironment } from './server-utils/index.js';
 
 /**
  * TODO: Extract this out to a backend lib with a thin wrapper around pino.
  * Logger with environment-specific configuration
  */
-
-const isDevelopment = config.NODE_ENV === 'development';
-
 export const logger = pino({
   // Environment-based log levels
-  level: isDevelopment ? 'debug' : 'info',
+  level: isProdLikeEnvironment ? 'info' : 'debug',
 
-  base: isDevelopment
-    ? {}
-    : {
+  base: isProdLikeEnvironment
+    ? {
         service: 'pback',
-        env: config.NODE_ENV,
+        env: env.NODE_ENV,
         version:
           JSON.parse(readFileSync(`${appRoot.path}/apps/pback/package.json`, 'utf8'))?.version ??
           '0.0.0'
-      },
+      }
+    : {},
 
   timestamp: pino.stdTimeFunctions.isoTime,
 
   // Pretty printing for development only
-  transport: isDevelopment
-    ? {
+  transport: isProdLikeEnvironment
+    ? undefined
+    : {
         target: 'pino-pretty',
         options: {
           translateTime: 'SYS:standard',
@@ -36,9 +35,7 @@ export const logger = pino({
           colorize: true,
           singleLine: true
         }
-      }
-    : undefined,
-
+      },
   // Enhanced redaction for security
   redact: {
     paths: [
