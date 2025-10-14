@@ -54,6 +54,16 @@
           "inspect": false
         }
       },
+      "start": {
+        "executor": "nx:run-commands",
+        "dependsOn": [
+          "build"
+        ],
+        "options": {
+          "buildTarget": "@product-base/pback:build",
+          "command": "node apps/pback/dist/main.js"
+        }
+      },
       "test": {
         "options": {
           "passWithNoTests": true
