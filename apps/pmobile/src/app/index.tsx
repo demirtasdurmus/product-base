@@ -67,7 +67,7 @@ export default function Index() {
   }, [isAuthenticated, navContainerRef.isReady()]);
 
   if (isPending) {
-    return <ActivityIndicator />;
+    return <ActivityIndicator testID="activity-indicator" />;
   }
 
   return (
@@ -80,7 +80,7 @@ export default function Index() {
             height: 40
           }}
         />
-        <CardTitle>Sign In to your account</CardTitle>
+        <CardTitle testID="heading">Sign In to your account</CardTitle>
       </CardHeader>
 
       <CardContent className="gap-2 px-6">
