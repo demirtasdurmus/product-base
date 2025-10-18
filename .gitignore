@@ -71,3 +71,5 @@ cache/
 .harper-dictionary.txt
 
 tsconfig.tsbuildinfo
+
+apps/pmobile-e2e/artifacts

@@ -13,6 +13,7 @@
     "name": "pmobile"
   },
   "dependencies": {
+    "@product-base/shared": "*",
     "@better-auth/expo": "*",
     "@expo/metro-config": "*",
     "@expo/vector-icons": "*",

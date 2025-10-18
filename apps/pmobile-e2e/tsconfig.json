@@ -1,0 +1,22 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "sourceMap": false,
+    "outDir": "out-tsc/detox",
+    "allowJs": true,
+    "types": ["node", "jest", "detox"],
+    "rootDir": "src",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "tsBuildInfoFile": "out-tsc/detox/tsconfig.tsbuildinfo"
+  },
+  "include": ["src/**/*.ts", "src/**/*.js"],
+  "exclude": [
+    "out-tsc",
+    "dist",
+    "test-output",
+    "eslint.config.js",
+    "eslint.config.cjs",
+    "eslint.config.mjs"
+  ]
+}
