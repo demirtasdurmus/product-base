@@ -12,6 +12,11 @@ export function httpLogger({
   return isProdLikeEnvironment
     ? pinoHttp({
         logger,
+        genReqId: (_req: Request, res: Response) => {
+          const id = crypto.randomUUID();
+          res.setHeader('X-Request-Id', id);
+          return id;
+        },
         customLogLevel: (req, res, err) => {
           if (skipPaths?.some((path) => req.url?.includes(path))) return 'debug';
           if (res.statusCode >= 400 && res.statusCode < 500) return 'warn';
