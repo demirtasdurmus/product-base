@@ -19,10 +19,10 @@
     "name": "backend"
   },
   "dependencies": {
+    "@product-base/shared": "*",
     "tslib": "*",
     "drizzle-orm": "*",
     "http-status": "*",
-    "@product-base/shared": "*",
     "zod": "*"
   }
 }

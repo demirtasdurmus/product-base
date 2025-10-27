@@ -12,7 +12,12 @@ export const errorHandler: ErrorRequestHandler<
 > = (err, _req, res, _next) => {
   const error = serializeError(err);
 
-  res.locals.error = error;
+  res.locals.error = {
+    name: error.name,
+    statusCode: error.statusCode,
+    message: error.message,
+    ...(error.data ? { ...error.data } : {})
+  };
 
   return sendErrorResponse({
     error,

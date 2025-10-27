@@ -1,34 +1,52 @@
 import { expo } from '@better-auth/expo';
-import { betterAuth, BetterAuthPlugin } from 'better-auth';
+import { APIError, betterAuth, BetterAuthPlugin, Status } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
-import { models } from '@product-base/backend';
+import httpStatus from 'http-status';
+import { BaseError, models } from '@product-base/backend';
 import { env } from '../env/index.js';
 import { db } from './db.js';
+import { isProdLikeEnvironment } from './server-utils/index.js';
 
 /**
  * @see https://www.better-auth.com/docs/integrations/express
  */
 export const auth = betterAuth({
+  appName: 'Product Base',
+  baseURL: env.BETTER_AUTH_URL,
   secret: env.BETTER_AUTH_SECRET,
-  url: env.BETTER_AUTH_URL,
-  logger: {
-    disabled: true
-  },
-  emailAndPassword: {
-    enabled: true
-  },
   database: drizzleAdapter(db, {
     provider: 'pg',
     schema: models
   }),
-  advanced: {
-    database: {
-      useNumberId: true
-    }
+  emailAndPassword: {
+    enabled: true,
+    revokeSessionsOnPasswordReset: true
+  },
+  plugins: [expo() as BetterAuthPlugin],
+  trustedOrigins: ['pmobile://'],
+  logger: {
+    disabled: true
   },
   /**
    * @see https://github.com/better-auth/better-auth/issues/1974
    */
-  plugins: [expo() as BetterAuthPlugin],
-  trustedOrigins: ['pmobile://']
+  onAPIError: {
+    onError(error, _ctx) {
+      if (error instanceof APIError) {
+        throw new BaseError(
+          httpStatus[`${error.statusCode as Status}_NAME`],
+          error.statusCode,
+          error.body?.message ?? 'An unexpected authentication error occurred',
+          false
+        );
+      }
+      throw error;
+    }
+  },
+  advanced: {
+    disableOriginCheck: !isProdLikeEnvironment,
+    database: {
+      useNumberId: true
+    }
+  }
 });
