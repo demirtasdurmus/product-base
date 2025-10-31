@@ -15,7 +15,7 @@
     "sharedGlobals": ["{workspaceRoot}/.github/workflows/ci.yml"]
   },
   "tui": {
-    "enabled": false
+    "enabled": true
   },
   "plugins": [
     {
