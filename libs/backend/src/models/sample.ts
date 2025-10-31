@@ -1,11 +1,8 @@
-import { pgTable, serial, timestamp, varchar } from 'drizzle-orm/pg-core';
+import { pgTable, serial, text } from 'drizzle-orm/pg-core';
+import { timestamps } from './utils/timestamps.js';
 
 export const sample = pgTable('sample', {
   id: serial('id').primaryKey(),
-  name: varchar({ length: 255 }).unique().notNull(),
-  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
-  updatedAt: timestamp('updated_at', { withTimezone: true })
-    .defaultNow()
-    .$onUpdate(() => /* @__PURE__ */ new Date())
-    .notNull()
+  name: text('name').unique().notNull(),
+  ...timestamps
 });

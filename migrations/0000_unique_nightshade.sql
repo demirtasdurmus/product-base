@@ -1,8 +1,9 @@
 CREATE TABLE "sample" (
 	"id" serial PRIMARY KEY NOT NULL,
-	"name" varchar(255) NOT NULL,
+	"name" text NOT NULL,
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
-	"updated_at" timestamp with time zone DEFAULT now() NOT NULL
+	"updated_at" timestamp with time zone DEFAULT now() NOT NULL,
+	CONSTRAINT "sample_name_unique" UNIQUE("name")
 );
 --> statement-breakpoint
 CREATE TABLE "account" (
@@ -16,9 +17,9 @@ CREATE TABLE "account" (
 	"refresh_token_expires_at" timestamp with time zone,
 	"scope" text,
 	"password" text,
+	"user_id" integer NOT NULL,
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
-	"updated_at" timestamp with time zone NOT NULL,
-	"user_id" integer NOT NULL
+	"updated_at" timestamp with time zone NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE "session" (
@@ -27,9 +28,9 @@ CREATE TABLE "session" (
 	"token" text NOT NULL,
 	"ip_address" text,
 	"user_agent" text,
-	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
-	"updated_at" timestamp with time zone NOT NULL,
 	"user_id" integer NOT NULL,
+	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
+	"updated_at" timestamp with time zone DEFAULT now() NOT NULL,
 	CONSTRAINT "session_token_unique" UNIQUE("token")
 );
 --> statement-breakpoint

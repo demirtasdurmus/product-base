@@ -1,4 +1,5 @@
 import { boolean, integer, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
+import { timestamps } from './utils/timestamps.js';
 
 export const user = pgTable('user', {
   id: serial('id').primaryKey(),
@@ -6,11 +7,7 @@ export const user = pgTable('user', {
   email: text('email').notNull().unique(),
   emailVerified: boolean('email_verified').default(false).notNull(),
   image: text('image'),
-  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
-  updatedAt: timestamp('updated_at', { withTimezone: true })
-    .defaultNow()
-    .$onUpdate(() => /* @__PURE__ */ new Date())
-    .notNull()
+  ...timestamps
 });
 
 export const session = pgTable('session', {
@@ -19,13 +16,10 @@ export const session = pgTable('session', {
   token: text('token').notNull().unique(),
   ipAddress: text('ip_address'),
   userAgent: text('user_agent'),
-  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
-  updatedAt: timestamp('updated_at', { withTimezone: true })
-    .$onUpdate(() => /* @__PURE__ */ new Date())
-    .notNull(),
   userId: integer('user_id')
     .notNull()
-    .references(() => user.id, { onDelete: 'cascade' })
+    .references(() => user.id, { onDelete: 'cascade' }),
+  ...timestamps
 });
 
 export const account = pgTable('account', {
@@ -39,13 +33,14 @@ export const account = pgTable('account', {
   refreshTokenExpiresAt: timestamp('refresh_token_expires_at', { withTimezone: true }),
   scope: text('scope'),
   password: text('password'),
-  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
-  updatedAt: timestamp('updated_at', { withTimezone: true })
-    .$onUpdate(() => /* @__PURE__ */ new Date())
-    .notNull(),
   userId: integer('user_id')
     .notNull()
-    .references(() => user.id, { onDelete: 'cascade' })
+    .references(() => user.id, { onDelete: 'cascade' }),
+  ...timestamps,
+  /* Override the default updated_at timestamp, not to set default now value */
+  updatedAt: timestamp('updated_at', { withTimezone: true })
+    .$onUpdate(() => /* @__PURE__ */ new Date())
+    .notNull()
 });
 
 export const verification = pgTable('verification', {
@@ -53,9 +48,5 @@ export const verification = pgTable('verification', {
   identifier: text('identifier').notNull(),
   value: text('value').notNull(),
   expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
-  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
-  updatedAt: timestamp('updated_at', { withTimezone: true })
-    .defaultNow()
-    .$onUpdate(() => /* @__PURE__ */ new Date())
-    .notNull()
+  ...timestamps
 });
