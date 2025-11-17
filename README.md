@@ -1,38 +1,41 @@
-# NxExampleTwo
+# Product Base
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+Product-ready Nx workspace bundling a Node backend, an Expo mobile client, and shared TypeScript libraries.
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+## Workspace Map
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/node?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+- `apps/pback` – Express-based API starter
+- `apps/pmobile` – Expo / React Native starter
+- `libs/backend` – backend domain models and errors
+- `libs/shared` – env helpers, response types, utilities
 
-## Finish your CI setup
-
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/WrBYHIyMvp)
-
-## Run tasks
-
-To run the dev server for your app, use:
+## Getting Started
 
 ```sh
-npx nx serve pback
+nvm use                 # or install the Node version in .nvmrc
+npm install
+npx nx graph            # optional: visualize project relationships
+npx nx serve pback      # run the API
+npx nx start pmobile    # open the mobile app with Expo
 ```
 
-To create a production bundle:
+## Common Commands
 
-```sh
-npx nx build pback
+- `npx nx build pback` – production backend build
+- `npx nx lint pmobile` – lint the mobile app
+- `npx nx test backend` – run backend library tests
+- `npx nx show project <name>` – inspect any project’s targets
+
+## Repo Layout
+
+```text
+apps/       deployable services & clients
+libs/       shared code (models, utils, env)
+migrations/ SQL migrations managed with Drizzle
+tools/      workspace automation scripts
 ```
 
-To see all available targets to run for a project, run:
-
-```sh
-npx nx show project pback
-```
-
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
-
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+Use `npx nx list` to discover installed plugins and `npx nx g <generator>` to scaffold new features as the workspace grows.
 
 ## Add new projects
 

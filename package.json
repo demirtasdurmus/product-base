@@ -4,7 +4,7 @@
   "license": "MIT",
   "private": true,
   "engines": {
-    "node": ">=22.0.0"
+    "node": ">=24.0.0 <25.0.0"
   },
   "scripts": {
     "pback:serve": "nx serve pback",
@@ -106,7 +106,7 @@
     "@swc/jest": "~0.2.38",
     "@testing-library/jest-dom": "~6.9.1",
     "@testing-library/react-native": "~13.2.0",
-    "@types/express": "^5.0.3",
+    "@types/express": "^5.0.5",
     "@types/jest": "^30.0.0",
     "@types/node": "20.19.9",
     "@types/pg": "^8.15.5",
