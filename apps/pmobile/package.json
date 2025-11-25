@@ -28,6 +28,7 @@
     "expo": "*",
     "expo-constants": "*",
     "expo-linking": "*",
+    "expo-network": "*",
     "expo-router": "*",
     "expo-secure-store": "*",
     "expo-splash-screen": "*",
