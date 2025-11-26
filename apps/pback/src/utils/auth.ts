@@ -1,5 +1,5 @@
 import { expo } from '@better-auth/expo';
-import { APIError, betterAuth, BetterAuthPlugin, Status } from 'better-auth';
+import { APIError, betterAuth, Status } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 import httpStatus from 'http-status';
 import { BaseError, models } from '@product-base/backend';
@@ -22,7 +22,7 @@ export const auth = betterAuth({
     enabled: true,
     revokeSessionsOnPasswordReset: true
   },
-  plugins: [expo() as BetterAuthPlugin],
+  plugins: [expo()],
   trustedOrigins: ['pmobile://'],
   logger: {
     disabled: true

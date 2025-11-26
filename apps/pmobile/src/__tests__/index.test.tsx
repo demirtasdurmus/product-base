@@ -10,9 +10,13 @@ describe('Home screen', () => {
   });
 
   it('should render activity indicator while auth client is loading', async () => {
-    jest
-      .mocked(authClient.useSession)
-      .mockReturnValue({ data: null, isPending: true, error: null, refetch: jest.fn() });
+    jest.mocked(authClient.useSession).mockReturnValue({
+      data: null,
+      isPending: true,
+      isRefetching: false,
+      error: null,
+      refetch: jest.fn()
+    });
 
     const screen = render(<Home />);
 
@@ -41,6 +45,7 @@ describe('Home screen', () => {
         }
       },
       isPending: false,
+      isRefetching: false,
       error: null,
       refetch: jest.fn()
     });
@@ -53,9 +58,13 @@ describe('Home screen', () => {
   });
 
   it('should push to sign up page when user clicks on create account', async () => {
-    jest
-      .mocked(authClient.useSession)
-      .mockReturnValue({ data: null, isPending: false, error: null, refetch: jest.fn() });
+    jest.mocked(authClient.useSession).mockReturnValue({
+      data: null,
+      isPending: false,
+      isRefetching: false,
+      error: null,
+      refetch: jest.fn()
+    });
 
     const screen = render(<Home />);
 
@@ -65,9 +74,13 @@ describe('Home screen', () => {
   });
 
   it('should push to forget password page when user clicks on forget password', async () => {
-    jest
-      .mocked(authClient.useSession)
-      .mockReturnValue({ data: null, isPending: false, error: null, refetch: jest.fn() });
+    jest.mocked(authClient.useSession).mockReturnValue({
+      data: null,
+      isPending: false,
+      isRefetching: false,
+      error: null,
+      refetch: jest.fn()
+    });
 
     const screen = render(<Home />);
 
@@ -77,9 +90,13 @@ describe('Home screen', () => {
   });
 
   it('should render sign in form when auth client is loaded and user is not authenticated', async () => {
-    jest
-      .mocked(authClient.useSession)
-      .mockReturnValue({ data: null, isPending: false, error: null, refetch: jest.fn() });
+    jest.mocked(authClient.useSession).mockReturnValue({
+      data: null,
+      isPending: false,
+      isRefetching: false,
+      error: null,
+      refetch: jest.fn()
+    });
 
     const screen = render(<Home />);
 
@@ -87,9 +104,13 @@ describe('Home screen', () => {
   });
 
   it('should show validation errors when sign in form is submitted with invalid data', async () => {
-    jest
-      .mocked(authClient.useSession)
-      .mockReturnValue({ data: null, isPending: false, error: null, refetch: jest.fn() });
+    jest.mocked(authClient.useSession).mockReturnValue({
+      data: null,
+      isPending: false,
+      isRefetching: false,
+      error: null,
+      refetch: jest.fn()
+    });
 
     const alertSpy = jest.spyOn(Alert, 'alert').mockImplementation(() => {
       '';
@@ -111,9 +132,13 @@ describe('Home screen', () => {
   });
 
   it('should submit sign in form with valid data', async () => {
-    jest
-      .mocked(authClient.useSession)
-      .mockReturnValue({ data: null, isPending: false, error: null, refetch: jest.fn() });
+    jest.mocked(authClient.useSession).mockReturnValue({
+      data: null,
+      isPending: false,
+      isRefetching: false,
+      error: null,
+      refetch: jest.fn()
+    });
 
     const screen = render(<Home />);
 
