@@ -15,6 +15,7 @@
     "Pressable",
     "swcrc",
     "testem",
+    "toplevel",
     "worklets"
   ],
   "files.associations": {

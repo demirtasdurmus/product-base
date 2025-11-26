@@ -36,6 +36,7 @@
     "pback:test": "infisical run --env=test -- nx test pback",
     "pmobile:test": "infisical run --env=test -- nx test pmobile",
     "pback:e2e": "infisical run --env=test -- nx e2e pback-e2e",
+    "clean": "./tools/scripts/clean.sh",
     "prepare": "husky"
   },
   "dependencies": {
