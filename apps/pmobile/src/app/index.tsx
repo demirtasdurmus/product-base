@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import Ionicons from '@expo/vector-icons/AntDesign';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { router, useNavigationContainerRef } from 'expo-router';
 import { Controller, FieldErrors, useForm } from 'react-hook-form';
@@ -8,6 +9,7 @@ import { Button } from '../components/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../components/card';
 import { Checkbox } from '../components/checkbox';
 import { Input } from '../components/input';
+import { Separator } from '../components/separator';
 import { Text } from '../components/text';
 import { authClient } from '../lib/auth-client';
 import { formatFormErrors } from '../lib/utils';
@@ -84,6 +86,40 @@ export default function Index() {
       </CardHeader>
 
       <CardContent className="gap-2 px-6">
+        <Button
+          onPress={() => {
+            authClient.signIn.social({
+              provider: 'google',
+              callbackURL: 'pmobile://dashboard'
+            });
+          }}
+          variant="outline"
+          className="flex flex-row items-center gap-2"
+        >
+          <Ionicons name="google" size={16} />
+          <Text>Sign In with Google</Text>
+        </Button>
+
+        <Button
+          variant="outline"
+          className="flex flex-row items-center gap-2"
+          onPress={() => {
+            authClient.signIn.social({
+              provider: 'github',
+              callbackURL: 'pmobile://dashboard'
+            });
+          }}
+        >
+          <Ionicons name="github" size={16} />
+          <Text>Sign In with GitHub</Text>
+        </Button>
+
+        <View className="my-4 w-full flex-row items-center gap-2 px-6">
+          <Separator className="w-3/12 flex-grow" />
+          <Text>or continue with</Text>
+          <Separator className="w-3/12 flex-grow" />
+        </View>
+
         <View>
           <KeyboardAvoidingView>
             <Controller

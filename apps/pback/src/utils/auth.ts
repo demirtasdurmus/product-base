@@ -23,10 +23,17 @@ export const auth = betterAuth({
     revokeSessionsOnPasswordReset: true
   },
   socialProviders: {
+    /**
+     * @see https://www.better-auth.com/docs/authentication/google
+     */
     google: {
       clientId: env.GOOGLE_CLIENT_ID,
       clientSecret: env.GOOGLE_CLIENT_SECRET
-    }
+    },
+    /**
+     * @see https://www.better-auth.com/docs/authentication/github
+     */
+    github: { clientId: env.GITHUB_CLIENT_ID, clientSecret: env.GITHUB_CLIENT_SECRET }
   },
   plugins: [expo()],
   trustedOrigins: ['pmobile://'],

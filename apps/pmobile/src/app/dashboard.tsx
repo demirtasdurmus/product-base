@@ -32,11 +32,13 @@ export default function Dashboard() {
       <CardHeader>
         <View className="flex-row items-center gap-2">
           <Avatar alt="user-image">
-            <AvatarImage
-              source={{
-                uri: session?.user?.image || ''
-              }}
-            />
+            {session?.user?.image && (
+              <AvatarImage
+                source={{
+                  uri: session.user.image
+                }}
+              />
+            )}
 
             <AvatarFallback>
               <Text>{session?.user?.name[0]}</Text>

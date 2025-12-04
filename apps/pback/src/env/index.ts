@@ -8,6 +8,8 @@ const serverEnvSchema = z.object({
   BETTER_AUTH_URL: z.url({ error: 'BETTER_AUTH_URL is required' }),
   GOOGLE_CLIENT_ID: z.string({ error: 'GOOGLE_CLIENT_ID is required' }),
   GOOGLE_CLIENT_SECRET: z.string({ error: 'GOOGLE_CLIENT_SECRET is required' }),
+  GITHUB_CLIENT_ID: z.string({ error: 'GITHUB_CLIENT_ID is required' }),
+  GITHUB_CLIENT_SECRET: z.string({ error: 'GITHUB_CLIENT_SECRET is required' }),
   DATABASE_URL: z
     .url({
       message: 'DATABASE_URL must be a valid PostgreSQL connection string',
