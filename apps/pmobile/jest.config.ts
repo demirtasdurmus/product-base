@@ -4,6 +4,7 @@ module.exports = {
   preset: 'jest-expo',
   moduleFileExtensions: ['ts', 'js', 'html', 'tsx', 'jsx'],
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
+  testPathIgnorePatterns: ['\\.d\\.ts$'],
   moduleNameMapper: {
     '\\.svg$': '@nx/expo/plugins/jest/svg-mock'
   },
