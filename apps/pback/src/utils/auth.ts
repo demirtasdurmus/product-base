@@ -35,8 +35,22 @@ export const auth = betterAuth({
      */
     github: { clientId: env.GITHUB_CLIENT_ID, clientSecret: env.GITHUB_CLIENT_SECRET }
   },
+  /**
+   * @see https://www.better-auth.com/docs/integrations/expo
+   */
   plugins: [expo()],
-  trustedOrigins: ['pmobile://'],
+  trustedOrigins: [
+    'pmobile://',
+    ...(env.NODE_ENV === 'development'
+      ? [
+          'exp://*/*', // Trust all Expo development URLs
+          'exp://10.0.0.*:*/*', // Trust 10.0.0.x IP range
+          'exp://192.168.*.*:*/*', // Trust 192.168.x.x IP range
+          'exp://172.*.*.*:*/*', // Trust 172.x.x.x IP range
+          'exp://localhost:*/*' // Trust localhost
+        ]
+      : [])
+  ],
   logger: {
     disabled: true
   },
