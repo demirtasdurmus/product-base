@@ -4,10 +4,8 @@
   "private": true,
   "scripts": {
     "eas-build-post-install": "cd ../../ && node tools/scripts/eas-build-post-install.mjs . apps/pmobile",
-    "ios:serve": "expo start --ios --clear",
-    "android:serve": "expo start --android --clear",
-    "android": "expo run:android",
-    "ios": "expo run:ios"
+    "ios": "expo run:ios",
+    "android": "expo run:android"
   },
   "nx": {
     "name": "pmobile"
@@ -24,7 +22,6 @@
     "@rn-primitives/checkbox": "*",
     "@rn-primitives/dialog": "*",
     "@rn-primitives/separator": "*",
-    "@react-native-async-storage/async-storage": "*",
     "better-auth": "*",
     "expo": "*",
     "expo-constants": "*",
@@ -44,6 +41,8 @@
     "react": "*",
     "react-hook-form": "*",
     "react-native": "*",
+    "react-native-mmkv": "*",
+    "react-native-nitro-modules": "*",
     "react-native-reanimated": "*",
     "react-native-safe-area-context": "*",
     "react-native-screens": "*",

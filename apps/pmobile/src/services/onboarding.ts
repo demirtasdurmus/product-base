@@ -6,17 +6,13 @@ class OnboardingService {
 
   constructor(private readonly storage: LocalStorage) {}
 
-  async getOnboardingCompleted(): Promise<boolean> {
-    const value = await this.storage.get(this.onboardingCompletedKey);
-    return value === 'true' ? true : value === 'false' ? false : false;
+  getOnboardingCompleted(): boolean {
+    const value = this.storage.get(this.onboardingCompletedKey, 'boolean');
+    return value ?? false;
   }
 
-  async setOnboardingCompleted(completed: boolean): Promise<void> {
-    await this.storage.set(this.onboardingCompletedKey, completed);
-  }
-
-  async deleteOnboardingCompleted(): Promise<void> {
-    await this.storage.delete(this.onboardingCompletedKey);
+  setOnboardingCompleted(completed: boolean): void {
+    this.storage.set(this.onboardingCompletedKey, completed);
   }
 }
 

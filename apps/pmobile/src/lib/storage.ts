@@ -1,37 +1,65 @@
-import AsyncStorage, { AsyncStorageStatic } from '@react-native-async-storage/async-storage';
+import { createMMKV, MMKV } from 'react-native-mmkv';
 
 /**
- * A thin wrapper around the AsyncStorage API.
- * We can update the underlying storage mechanism later with react-native-mmkv later
- * but for now, we'll use AsyncStorage because mmkv is not supported in Expo Go.
+ * A thin wrapper around the MMKV API.
  */
 export class LocalStorage {
-  constructor(private readonly storage: AsyncStorageStatic) {}
+  constructor(private readonly storage: MMKV) {}
 
-  async get(key: string): Promise<string | null> {
+  get(key: string, as: 'boolean'): boolean | null;
+  get(key: string, as: 'string'): string | null;
+  get(key: string, as: 'number'): number | null;
+  get(key: string, as?: 'string'): string | null;
+  get(
+    key: string,
+    as: 'boolean' | 'string' | 'number' = 'string'
+  ): boolean | string | number | null {
+    switch (as) {
+      case 'boolean':
+        return this.getBoolean(key);
+      case 'string':
+        return this.getString(key);
+      case 'number':
+        return this.getNumber(key);
+      default:
+        return null;
+    }
+  }
+
+  set(key: string, value: boolean | string | number): void {
     try {
-      return await this.storage.getItem(key);
+      this.storage.set(key, value);
+    } catch (error) {
+      console.error('error setting item', error);
+    }
+  }
+
+  private getBoolean(key: string): boolean | null {
+    try {
+      return this.storage.getBoolean(key) ?? null;
     } catch (error) {
       console.error('error getting item', error);
       return null;
     }
   }
 
-  async set(key: string, value: boolean | string | number): Promise<void> {
+  private getString(key: string): string | null {
     try {
-      await this.storage.setItem(key, String(value));
+      return this.storage.getString(key) ?? null;
     } catch (error) {
-      console.error('error setting item', error);
+      console.error('error getting item', error);
+      return null;
     }
   }
 
-  async delete(key: string): Promise<void> {
+  private getNumber(key: string): number | null {
     try {
-      await this.storage.removeItem(key);
+      return this.storage.getNumber(key) ?? null;
     } catch (error) {
-      console.error('error deleting item', error);
+      console.error('error getting item', error);
+      return null;
     }
   }
 }
 
-export const localStorage = new LocalStorage(AsyncStorage);
+export const localStorage = new LocalStorage(createMMKV());

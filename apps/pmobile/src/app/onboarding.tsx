@@ -47,18 +47,18 @@ export default function Onboarding() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const flatListRef = useRef<FlatList<OnboardingScreenData>>(null);
 
-  const handleSkip = useCallback(async () => {
-    await onboardingService.setOnboardingCompleted(true);
+  const handleSkip = useCallback(() => {
+    onboardingService.setOnboardingCompleted(true);
     router.replace('/');
   }, []);
 
-  const handleNext = useCallback(async () => {
+  const handleNext = useCallback(() => {
     if (currentIndex < ONBOARDING_SCREENS.length - 1) {
       const nextIndex = currentIndex + 1;
       flatListRef.current?.scrollToIndex({ index: nextIndex, animated: true });
       setCurrentIndex(nextIndex);
     } else {
-      await onboardingService.setOnboardingCompleted(true);
+      onboardingService.setOnboardingCompleted(true);
       router.replace('/');
     }
   }, [currentIndex]);

@@ -12,17 +12,13 @@ export default function RootLayout() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const checkOnboarding = async () => {
-      const completed = await onboardingService.getOnboardingCompleted();
+    const completed = onboardingService.getOnboardingCompleted();
 
-      setIsCheckingOnboarding(false);
+    setIsCheckingOnboarding(false);
 
-      if (!completed && pathname !== '/onboarding') {
-        router.replace('/onboarding');
-      }
-    };
-
-    checkOnboarding();
+    if (!completed && pathname !== '/onboarding') {
+      router.replace('/onboarding');
+    }
   }, [pathname, router]);
 
   if (isCheckingOnboarding) {
