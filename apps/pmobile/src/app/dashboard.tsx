@@ -6,6 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '../components/avatar';
 import { Button } from '../components/button';
 import { Card, CardFooter, CardHeader } from '../components/card';
 import { Text } from '../components/text';
+import { Large, Muted } from '../components/typography';
 import { authClient } from '../lib/auth-client';
 
 export default function Dashboard() {
@@ -46,8 +47,8 @@ export default function Dashboard() {
           </Avatar>
 
           <View>
-            <Text className="font-bold">{session?.user?.name}</Text>
-            <Text className="text-sm">{session?.user?.email}</Text>
+            <Large>{session?.user?.name}</Large>
+            <Muted>{session?.user?.email}</Muted>
           </View>
         </View>
       </CardHeader>

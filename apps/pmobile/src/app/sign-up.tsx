@@ -7,6 +7,7 @@ import { Button } from '../components/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../components/card';
 import { Input } from '../components/input';
 import { Text } from '../components/text';
+import { P } from '../components/typography';
 import { authClient } from '../lib/auth-client';
 import { formatFormErrors } from '../lib/utils';
 
@@ -133,7 +134,7 @@ export default function SignUp() {
             <Text>Sign Up</Text>
           </Button>
 
-          <Text className="mt-2 text-center">
+          <P className="mt-2 text-center">
             Already have an account?{' '}
             <Text
               className="underline"
@@ -143,7 +144,7 @@ export default function SignUp() {
             >
               Sign In
             </Text>
-          </Text>
+          </P>
         </View>
       </CardFooter>
     </Card>

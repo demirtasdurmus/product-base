@@ -11,6 +11,7 @@ import { Checkbox } from '../components/checkbox';
 import { Input } from '../components/input';
 import { Separator } from '../components/separator';
 import { Text } from '../components/text';
+import { Muted, P } from '../components/typography';
 import { authClient } from '../lib/auth-client';
 import { formatFormErrors } from '../lib/utils';
 
@@ -116,7 +117,7 @@ export default function Index() {
 
         <View className="my-4 w-full flex-row items-center gap-2 px-6">
           <Separator className="w-3/12 flex-grow" />
-          <Text>or continue with</Text>
+          <Muted>or continue with</Muted>
           <Separator className="w-3/12 flex-grow" />
         </View>
 
@@ -185,7 +186,7 @@ export default function Index() {
             <Text>Continue</Text>
           </Button>
 
-          <Text className="mt-2 text-center">
+          <P className="mt-2 text-center">
             Don't have an account?{' '}
             <Text
               className="underline"
@@ -195,7 +196,7 @@ export default function Index() {
             >
               Create Account
             </Text>
-          </Text>
+          </P>
         </View>
       </CardFooter>
     </Card>
