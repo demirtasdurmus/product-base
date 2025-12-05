@@ -2,11 +2,11 @@ import { useEffect } from 'react';
 import Ionicons from '@expo/vector-icons/AntDesign';
 import { router } from 'expo-router';
 import { View } from 'react-native';
-import { Avatar, AvatarFallback, AvatarImage } from '../components/avatar';
-import { Button } from '../components/button';
-import { Card, CardFooter, CardHeader } from '../components/card';
-import { Text } from '../components/text';
-import { Large, Muted } from '../components/typography';
+import { Avatar, AvatarFallback, AvatarImage } from '../components/ui/avatar';
+import { Button } from '../components/ui/button';
+import { Card, CardFooter, CardHeader } from '../components/ui/card';
+import { Text } from '../components/ui/text';
+import { Large, Muted } from '../components/ui/typography';
 import { authClient } from '../lib/auth-client';
 
 export default function Dashboard() {

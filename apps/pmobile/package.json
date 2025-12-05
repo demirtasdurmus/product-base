@@ -24,6 +24,7 @@
     "@rn-primitives/checkbox": "*",
     "@rn-primitives/dialog": "*",
     "@rn-primitives/separator": "*",
+    "@react-native-async-storage/async-storage": "*",
     "better-auth": "*",
     "expo": "*",
     "expo-constants": "*",

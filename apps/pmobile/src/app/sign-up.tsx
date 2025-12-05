@@ -3,11 +3,11 @@ import { useRouter } from 'expo-router';
 import { Controller, FieldErrors, useForm } from 'react-hook-form';
 import { Alert, Image, KeyboardAvoidingView, View } from 'react-native';
 import { z } from 'zod';
-import { Button } from '../components/button';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../components/card';
-import { Input } from '../components/input';
-import { Text } from '../components/text';
-import { P } from '../components/typography';
+import { Button } from '../components/ui/button';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../components/ui/card';
+import { Input } from '../components/ui/input';
+import { Text } from '../components/ui/text';
+import { P } from '../components/ui/typography';
 import { authClient } from '../lib/auth-client';
 import { formatFormErrors } from '../lib/utils';
 
