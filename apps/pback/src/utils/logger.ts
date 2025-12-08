@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import appRoot from 'app-root-path';
 import pino from 'pino';
+import { BACKEND_SERVICE_NAME } from '@product-base/shared';
 import { env } from '../env/index.js';
 import { isProdLikeEnvironment } from './server-utils/index.js';
 
@@ -14,11 +15,12 @@ export const logger = pino({
 
   base: isProdLikeEnvironment
     ? {
-        service: 'pback',
+        service: BACKEND_SERVICE_NAME,
         env: env.NODE_ENV,
         version:
-          JSON.parse(readFileSync(`${appRoot.path}/apps/pback/package.json`, 'utf8'))?.version ??
-          '0.0.0'
+          JSON.parse(
+            readFileSync(`${appRoot.path}/apps/${BACKEND_SERVICE_NAME}/package.json`, 'utf8')
+          )?.version ?? '0.0.0'
       }
     : {},
 

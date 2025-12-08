@@ -2,9 +2,16 @@ import '../global.css';
 
 import { useEffect, useState } from 'react';
 import { Slot, usePathname, useRouter } from 'expo-router';
+import * as SplashScreen from 'expo-splash-screen';
 import { ActivityIndicator } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { onboardingService } from '../services/onboarding';
+
+/**
+ * Keep the splash screen visible while we fetch resources
+ * @see https://docs.expo.dev/versions/latest/sdk/splash-screen/
+ */
+SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [isCheckingOnboarding, setIsCheckingOnboarding] = useState(true);
@@ -17,7 +24,9 @@ export default function RootLayout() {
     setIsCheckingOnboarding(false);
 
     if (!completed && pathname !== '/onboarding') {
-      router.replace('/onboarding');
+      requestAnimationFrame(() => {
+        router.replace('/onboarding');
+      });
     }
   }, [pathname, router]);
 

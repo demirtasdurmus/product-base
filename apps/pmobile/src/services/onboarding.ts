@@ -1,8 +1,8 @@
-import { STORAGE_PREFIX } from '../lib/constants';
+import { MOBILE_SERVICE_NAME } from '@product-base/shared';
 import { LocalStorage, localStorage } from '../lib/storage';
 
 class OnboardingService {
-  private readonly onboardingCompletedKey = `${STORAGE_PREFIX}:onboarding_completed`;
+  private readonly onboardingCompletedKey = `${MOBILE_SERVICE_NAME}:onboarding_completed`;
 
   constructor(private readonly storage: LocalStorage) {}
 

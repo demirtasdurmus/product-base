@@ -1,4 +1,5 @@
 import { createServer } from 'http';
+import { BACKEND_SERVICE_NAME } from '@product-base/shared';
 import { app } from './app.js';
 import { env } from './env/index.js';
 import { logger } from './utils/logger.js';
@@ -10,11 +11,7 @@ const port = env.PBACK_PORT;
 const server = createServer(app);
 
 server.listen(port, host, () => {
-  logger.info(`[ ready ] http://${host}:${port}`);
-});
-
-server.on('error', (error) => {
-  logger.error(error);
+  logger.info(`[${BACKEND_SERVICE_NAME}] is now ready at http://${host}:${port}`);
 });
 
 process.on('SIGINT', () => shutdownGracefully({ signalOrEvent: 'SIGINT', server }));

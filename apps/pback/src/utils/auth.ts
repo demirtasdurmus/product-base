@@ -3,6 +3,7 @@ import { APIError, betterAuth, Status } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 import httpStatus from 'http-status';
 import { BaseError, models } from '@product-base/backend';
+import { BACKEND_SERVICE_NAME, MOBILE_SERVICE_NAME } from '@product-base/shared';
 import { env } from '../env/index.js';
 import { db } from './db.js';
 import { isProdLikeEnvironment } from './server-utils/index.js';
@@ -11,7 +12,7 @@ import { isProdLikeEnvironment } from './server-utils/index.js';
  * @see https://www.better-auth.com/docs/integrations/express
  */
 export const auth = betterAuth({
-  appName: 'Product Base',
+  appName: BACKEND_SERVICE_NAME,
   baseURL: env.BETTER_AUTH_URL,
   secret: env.BETTER_AUTH_SECRET,
   database: drizzleAdapter(db, {
@@ -40,7 +41,7 @@ export const auth = betterAuth({
    */
   plugins: [expo()],
   trustedOrigins: [
-    'pmobile://',
+    `${MOBILE_SERVICE_NAME}://`,
     ...(env.NODE_ENV === 'development'
       ? [
           'exp://*/*', // Trust all Expo development URLs

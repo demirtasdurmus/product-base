@@ -5,6 +5,7 @@ import { router, useNavigationContainerRef } from 'expo-router';
 import { Controller, FieldErrors, useForm } from 'react-hook-form';
 import { ActivityIndicator, Alert, Image, KeyboardAvoidingView, View } from 'react-native';
 import { z } from 'zod';
+import { MOBILE_SERVICE_NAME } from '@product-base/shared';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../components/ui/card';
 import { Checkbox } from '../components/ui/checkbox';
@@ -91,7 +92,7 @@ export default function Index() {
           onPress={() => {
             authClient.signIn.social({
               provider: 'google',
-              callbackURL: 'pmobile://dashboard'
+              callbackURL: `${MOBILE_SERVICE_NAME}://dashboard`
             });
           }}
           variant="outline"
@@ -107,7 +108,7 @@ export default function Index() {
           onPress={() => {
             authClient.signIn.social({
               provider: 'github',
-              callbackURL: 'pmobile://dashboard'
+              callbackURL: `${MOBILE_SERVICE_NAME}://dashboard`
             });
           }}
         >
