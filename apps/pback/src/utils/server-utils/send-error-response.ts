@@ -1,22 +1,14 @@
 import { Response } from 'express';
 import { BaseError } from '@product-base/backend';
 import { ErrorResponseDetails, ServerResponse } from '@product-base/shared';
+import { isProdLikeEnvironment } from './index.js';
 
 /**
  * Create and send an error response
  * @param error - The error object
  * @param res - The response object
- * @param isProdLikeEnvironment - Whether the environment is production-like
  */
-export function sendErrorResponse({
-  error,
-  res,
-  isProdLikeEnvironment
-}: {
-  error: BaseError;
-  res: Response;
-  isProdLikeEnvironment: boolean;
-}): void {
+export function sendErrorResponse({ error, res }: { error: BaseError; res: Response }): void {
   const response: ServerResponse<ErrorResponseDetails> = {
     success: false,
     error: {

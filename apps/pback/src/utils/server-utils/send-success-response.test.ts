@@ -1,7 +1,6 @@
 import { Response } from 'express';
 import { sendSuccessResponse } from './send-success-response.js';
 
-// Mock Express Response object
 const createMockResponse = (): jest.Mocked<Response> => {
   const res = {
     status: jest.fn().mockReturnThis(),
