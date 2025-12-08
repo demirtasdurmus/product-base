@@ -4,16 +4,29 @@ import { logger } from '../logger.js';
 
 let isShuttingDown = false;
 
-export async function shutdownGracefully(
-  server: Server,
-  signalOrEvent: NodeJS.Signals | 'uncaughtException' | 'unhandledRejection'
-) {
+type ShutdownGracefully = {
+  signalOrEvent: NodeJS.Signals | 'uncaughtException' | 'unhandledRejection';
+  server: Server;
+  error?: unknown;
+  reason?: unknown;
+  promise?: Promise<unknown>;
+};
+
+export async function shutdownGracefully({
+  signalOrEvent,
+  server,
+  error,
+  reason,
+  promise
+}: ShutdownGracefully) {
   if (isShuttingDown) {
     logger.warn(`${signalOrEvent} received again, forcing exit`);
     process.exit(1);
   }
 
   isShuttingDown = true;
+  if (error) logger.error(error, `Error during: ${signalOrEvent}`);
+  if (reason && promise) logger.error({ reason, promise }, `Error during: ${signalOrEvent}`);
   logger.warn(`${signalOrEvent} received: starting graceful shutdown`);
 
   const shutdownTimeout = setTimeout(() => {

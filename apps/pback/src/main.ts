@@ -17,15 +17,13 @@ server.on('error', (error) => {
   logger.error(error);
 });
 
-process.on('SIGINT', () => shutdownGracefully(server, 'SIGINT'));
-process.on('SIGTERM', () => shutdownGracefully(server, 'SIGTERM'));
+process.on('SIGINT', () => shutdownGracefully({ signalOrEvent: 'SIGINT', server }));
+process.on('SIGTERM', () => shutdownGracefully({ signalOrEvent: 'SIGTERM', server }));
 
 process.on('uncaughtException', (error) => {
-  logger.error(error, 'Uncaught Exception');
-  shutdownGracefully(server, 'uncaughtException');
+  shutdownGracefully({ signalOrEvent: 'uncaughtException', server, error });
 });
 
 process.on('unhandledRejection', (reason, promise) => {
-  logger.error(reason, 'Unhandled Rejection at:', promise);
-  shutdownGracefully(server, 'unhandledRejection');
+  shutdownGracefully({ signalOrEvent: 'unhandledRejection', server, reason, promise });
 });
