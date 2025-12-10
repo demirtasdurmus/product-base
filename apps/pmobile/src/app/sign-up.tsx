@@ -66,7 +66,7 @@ export default function SignUp() {
     <Card className="z-50 mx-6">
       <CardHeader className="flex items-center justify-center gap-8">
         <Image
-          source={require('../../assets/images/logo.png')}
+          source={require('../../assets/images/icon.png')}
           style={{
             width: 40,
             height: 40

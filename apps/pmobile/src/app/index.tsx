@@ -78,7 +78,7 @@ export default function Index() {
     <Card className="bg-secondary z-50 mx-6 backdrop-blur-lg">
       <CardHeader className="flex items-center justify-center gap-8">
         <Image
-          source={require('../../assets/images/logo.png')}
+          source={require('../../assets/images/icon.png')}
           style={{
             width: 40,
             height: 40
