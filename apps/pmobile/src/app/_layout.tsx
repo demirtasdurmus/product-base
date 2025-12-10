@@ -19,14 +19,20 @@ export default function RootLayout() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const completed = onboardingService.getOnboardingCompleted();
+    try {
+      const completed = onboardingService.getOnboardingCompleted();
 
-    setIsCheckingOnboarding(false);
+      setIsCheckingOnboarding(false);
 
-    if (!completed && pathname !== '/onboarding') {
-      requestAnimationFrame(() => {
-        router.replace('/onboarding');
-      });
+      if (!completed && pathname !== '/onboarding') {
+        requestAnimationFrame(() => {
+          router.replace('/onboarding');
+        });
+      }
+    } catch (e) {
+      console.error('Initialization error:', e);
+    } finally {
+      SplashScreen.hideAsync();
     }
   }, [pathname, router]);
 
