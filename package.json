@@ -23,7 +23,7 @@
     "pback:start:prod": "infisical run --env=prod -- npm run pback:start",
     "pmobile:ios:dev": "infisical run --env=dev -- npm run pmobile:ios",
     "pmobile:android:dev": "infisical run --env=dev -- npm run pmobile:android",
-    "pmobile:prebuild:dev": "infisical run --env=dev -- npm run pmobile:prebuild",
+    "pmobile:prebuild:dev": "infisical run --env=dev -- nx run pmobile:prebuild --clean",
     "ios:back:dev": "infisical run --env=dev -- npm run ios:back",
     "android:back:dev": "infisical run --env=dev -- npm run android:back",
     "db:generate:dev": "infisical run --env=dev -- npm run db:generate",
