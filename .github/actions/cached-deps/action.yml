@@ -52,16 +52,25 @@ runs:
 
     - name: 'Install Dependencies'
       if: steps.cache-node-modules.outputs.cache-hit != 'true'
+      env:
+        # Skip husky in CI (git hooks not needed in CI environment)
+        HUSKY: 0
       run: |
         echo "=== Starting npm ci installation ==="
         echo "Start time: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+        echo "Note: This may take several minutes for large dependency trees..."
 
         # Show npm configuration for debugging
         echo "npm config:"
         npm config list || true
 
-        # Run npm ci with progress and verbose logging
-        npm ci --loglevel=info --no-audit --no-fund || {
+        # Run npm ci with optimized settings:
+        # - --prefer-offline: Use cached packages when available
+        # - --progress=false: Reduce progress bar noise
+        # - --loglevel=warn: Show warnings/errors but reduce info verbosity
+        # - --no-audit --no-fund: Skip non-essential checks for speed
+        # HUSKY=0 env var skips husky prepare script (not needed in CI)
+        npm ci --prefer-offline --progress=false --loglevel=warn --no-audit --no-fund || {
           EXIT_CODE=$?
           echo "npm ci failed with exit code: $EXIT_CODE"
           echo "End time: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
