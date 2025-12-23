@@ -1,8 +1,8 @@
 import { act, fireEvent, render, waitFor } from '@testing-library/react-native';
 import { router } from 'expo-router';
 import { Alert } from 'react-native';
-import Home from '../app/index';
-import { authClient } from '../lib/auth-client';
+import Home from '../src/app/index';
+import { authClient } from '../src/lib/auth-client';
 
 describe('Home screen', () => {
   beforeEach(() => {

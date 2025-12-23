@@ -3,7 +3,17 @@ module.exports = {
   resolver: require.resolve('./jest.resolver.js'),
   preset: 'jest-expo',
   moduleFileExtensions: ['ts', 'js', 'html', 'tsx', 'jsx'],
-  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/__tests__/setup.ts'],
+  testMatch: [
+    '<rootDir>/__tests__/**/*.test.ts',
+    '<rootDir>/__tests__/**/*.spec.ts',
+    '<rootDir>/__tests__/**/*.test.tsx',
+    '<rootDir>/__tests__/**/*.spec.tsx',
+    '<rootDir>/__tests__/**/*.test.js',
+    '<rootDir>/__tests__/**/*.spec.js',
+    '<rootDir>/__tests__/**/*.test.jsx',
+    '<rootDir>/__tests__/**/*.spec.jsx'
+  ],
   testPathIgnorePatterns: ['\\.d\\.ts$'],
   moduleNameMapper: {
     '\\.svg$': '@nx/expo/plugins/jest/svg-mock'
