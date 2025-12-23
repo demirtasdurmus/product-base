@@ -4,8 +4,8 @@ Product-ready Nx workspace bundling a Node backend, an Expo mobile client, and s
 
 ## Workspace Map
 
-- `apps/pback` – Express-based API starter
-- `apps/pmobile` – Expo / React Native starter
+- `apps/backend` – Express-based API starter
+- `apps/mobile` – Expo / React Native starter
 - `libs/backend` – backend domain models and errors
 - `libs/shared` – env helpers, response types, utilities
 
@@ -15,14 +15,14 @@ Product-ready Nx workspace bundling a Node backend, an Expo mobile client, and s
 nvm use                 # or install the Node version in .nvmrc
 npm install
 npx nx graph            # optional: visualize project relationships
-npx nx serve pback      # run the API
-npx nx start pmobile    # open the mobile app with Expo
+npx nx serve backend      # run the API
+npx nx start mobile    # open the mobile app with Expo
 ```
 
 ## Common Commands
 
-- `npx nx build pback` – production backend build
-- `npx nx lint pmobile` – lint the mobile app
+- `npx nx build backend` – production backend build
+- `npx nx lint mobile` – lint the mobile app
 - `npx nx test backend` – run backend library tests
 - `npx nx show project <name>` – inspect any project’s targets
 

@@ -43,7 +43,7 @@
       "options": {
         "targetName": "test"
       },
-      "exclude": ["apps/pback-e2e/**/*"]
+      "exclude": ["apps/backend-e2e/**/*"]
     },
     {
       "plugin": "@nx/docker",
@@ -64,16 +64,6 @@
         "submitTargetName": "submit",
         "runIosTargetName": "run-ios",
         "runAndroidTargetName": "run-android",
-        "buildDepsTargetName": "build-deps",
-        "watchDepsTargetName": "watch-deps"
-      }
-    },
-    {
-      "plugin": "@nx/detox/plugin",
-      "options": {
-        "buildTargetName": "build",
-        "startTargetName": "start",
-        "testTargetName": "test",
         "buildDepsTargetName": "build-deps",
         "watchDepsTargetName": "watch-deps"
       }
