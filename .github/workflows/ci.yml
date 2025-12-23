@@ -35,6 +35,5 @@ jobs:
 
       - name: Lint, Test, Build, Typecheck
         run: |
-          npx nx affected -t build --exclude=mobile,mobile-e2e
-          npx nx affected -t test --exclude=mobile-e2e
-          npx nx affected -t lint typecheck
+          npx nx affected -t build --exclude=mobile
+          npx nx affected -t test lint typecheck

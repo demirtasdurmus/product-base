@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "PMobile",
+    "name": "Mobile",
     "slug": "mobile",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -40,10 +40,7 @@
       "typedRoutes": true
     },
     "extra": {
-      "router": {},
-      "eas": {
-        "projectId": "57b3a501-643d-402c-8588-6405c117be0a"
-      }
+      "router": {}
     }
   }
 }
