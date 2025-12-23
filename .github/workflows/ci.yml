@@ -38,7 +38,3 @@ jobs:
           npx nx affected -t build --exclude=pmobile,pmobile-e2e
           npx nx affected -t test --exclude=pmobile-e2e
           npx nx affected -t lint typecheck
-
-      - name: Fix CI
-        run: npx nx fix-ci
-        if: always()
