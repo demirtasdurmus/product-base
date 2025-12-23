@@ -69,6 +69,19 @@
           "passWithNoTests": true
         }
       },
+      "test:int": {
+        "executor": "@nx/jest:jest",
+        "outputs": [
+          "{projectRoot}/test-output/jest/coverage-int"
+        ],
+        "options": {
+          "jestConfig": "apps/backend/jest-int.config.ts",
+          "passWithNoTests": true
+        },
+        "dependsOn": [
+          "@product-base/backend:build"
+        ]
+      },
       "typecheck": {
         "executor": "nx:run-commands",
         "options": {

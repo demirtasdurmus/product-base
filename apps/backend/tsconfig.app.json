@@ -10,9 +10,13 @@
   "exclude": [
     "src/**/*.spec.ts",
     "src/**/*.test.ts",
+    "__tests__/**/*.ts",
+    "__tests__/**/*.spec.ts",
+    "__tests__/**/*.test.ts",
     "out-tsc",
     "dist",
     "jest.config.ts",
+    "jest-int.config.ts",
     "eslint.config.mjs"
   ],
   "references": [

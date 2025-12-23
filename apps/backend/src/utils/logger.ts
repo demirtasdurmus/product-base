@@ -12,6 +12,7 @@ import { isProdLikeEnvironment } from './server-utils/index.js';
 export const logger = pino({
   // Environment-based log levels
   level: isProdLikeEnvironment ? 'info' : 'debug',
+  enabled: env.NODE_ENV !== 'test',
 
   base: isProdLikeEnvironment
     ? {
