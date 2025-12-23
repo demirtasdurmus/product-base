@@ -69,6 +69,13 @@
           "passWithNoTests": true
         }
       },
+      "typecheck": {
+        "executor": "nx:run-commands",
+        "options": {
+          "cwd": "apps/pback",
+          "command": "tsc --build --emitDeclarationOnly tsconfig.app.json"
+        }
+      },
       "prune-lockfile": {
         "dependsOn": [
           "build"
