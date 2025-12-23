@@ -38,14 +38,14 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.ACTIONS_PAT_GITHUB }}
-          commit-message: 'chore: update dependencies (minor versions only)'
-          title: 'chore: dependency updates (minor versions)'
+          commit-message: 'chore: update dependencies (patch versions only)'
+          title: 'chore: dependency updates (patch versions)'
           body: |
             ## Dependency Updates
 
-            This PR updates dependencies to their latest minor versions.
+            This PR updates dependencies to their latest patch versions.
 
-            **Note:** Only minor and patch version updates are included. Major version updates are excluded.
+            **Note:** Only patch version updates are included. Major and minor version updates are excluded.
 
             ### Configuration
             - Updated using `npx npm-check-updates`

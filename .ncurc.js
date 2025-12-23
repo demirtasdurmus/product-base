@@ -5,7 +5,13 @@ module.exports = {
   packageManager: 'npm',
   packageFile: 'package.json',
   reject: (name, _semver) => {
-    if (name.startsWith('@nx/') || name === 'nx') {
+    if (
+      name.startsWith('@nx/') ||
+      name.startsWith('react') ||
+      name.startsWith('@testing-library/') ||
+      name === 'nx' ||
+      name === '@types/react'
+    ) {
       return true;
     }
     return false;
