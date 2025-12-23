@@ -6,16 +6,16 @@ Product-ready Nx workspace bundling a Node backend, an Expo mobile client, and s
 
 - `apps/backend` – Express-based API starter
 - `apps/mobile` – Expo / React Native starter
-- `libs/backend` – backend domain models and errors
+- `libs/backend-core` – backend domain models and errors
 - `libs/shared` – env helpers, response types, utilities
 
 ## Getting Started
 
 ```sh
-nvm use                 # or install the Node version in .nvmrc
+nvm use                # or install the Node version in .nvmrc
 npm install
-npx nx graph            # optional: visualize project relationships
-npx nx serve backend      # run the API
+npx nx graph           # optional: visualize project relationships
+npx nx serve backend   # run the API
 npx nx start mobile    # open the mobile app with Expo
 ```
 
@@ -23,7 +23,7 @@ npx nx start mobile    # open the mobile app with Expo
 
 - `npx nx build backend` – production backend build
 - `npx nx lint mobile` – lint the mobile app
-- `npx nx test backend` – run backend library tests
+- `npx nx test backend-core` – run backend library tests
 - `npx nx show project <name>` – inspect any project’s targets
 
 ## Repo Layout
