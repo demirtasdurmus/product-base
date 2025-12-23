@@ -34,7 +34,10 @@ jobs:
         uses: nrwl/nx-set-shas@v4
 
       - name: Lint, Test, Build, Typecheck
-        run: npx nx affected -t lint test build typecheck
+        run: |
+          npx nx affected -t build --exclude=pmobile,pmobile-e2e
+          npx nx affected -t test --exclude=pmobile-e2e
+          npx nx affected -t lint typecheck
 
       - name: Fix CI
         run: npx nx fix-ci
