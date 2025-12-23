@@ -27,7 +27,7 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - name: Load & Cache Dependencies
+      - name: Get & Cache Dependencies
         uses: ./.github/actions/cached-deps
 
       - name: Derive appropriate SHAs for base and head for `nx affected` commands
