@@ -7,6 +7,8 @@
     "node": ">=22.0.0"
   },
   "scripts": {
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "backend:serve": "nx serve backend",
     "backend:build": "nx build backend",
     "backend:start": "nx start backend",
@@ -33,9 +35,7 @@
     "backend:test:int": "infisical run --env=test -- nx test:int backend --tui=false",
     "mobile:test": "infisical run --env=test -- nx test mobile --tui=false",
     "clean": "./tools/scripts/clean.sh",
-    "prepare": "husky",
-    "android": "expo run:android",
-    "ios": "expo run:ios"
+    "prepare": "husky"
   },
   "dependencies": {
     "@better-auth/expo": "^1.4.8",
