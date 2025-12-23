@@ -27,7 +27,7 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - name: Load & Cache Dependencies
+      - name: Get & Cache Dependencies
         uses: ./.github/actions/cached-deps
 
       - name: Derive appropriate SHAs for base and head for `nx affected` commands
@@ -35,6 +35,5 @@ jobs:
 
       - name: Lint, Test, Build, Typecheck
         run: |
-          npx nx affected -t build --exclude=pmobile,pmobile-e2e
-          npx nx affected -t test --exclude=pmobile-e2e
-          npx nx affected -t lint typecheck
+          npx nx affected -t build --exclude=mobile
+          npx nx affected -t test lint typecheck

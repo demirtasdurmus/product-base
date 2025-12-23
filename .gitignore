@@ -49,8 +49,8 @@ test-output
 .github/instructions/
 
 # Expo
-apps/pmobile/android
-apps/pmobile/ios
+apps/mobile/android
+apps/mobile/ios
 node_modules/
 .expo/
 .yarn/
@@ -60,7 +60,7 @@ npm-debug.*
 *.p8
 *.p12
 *.key
-*.pmobileprovision
+*.mobileprovision
 *.orig.*
 web-build/
 cache/
@@ -72,4 +72,4 @@ cache/
 
 tsconfig.tsbuildinfo
 
-apps/pmobile-e2e/artifacts
+apps/mobile-e2e/artifacts

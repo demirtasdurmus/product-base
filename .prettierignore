@@ -4,5 +4,5 @@
 /.nx/cache
 /.nx/workspace-data
 
-apps/pback/dist
-/apps/pback/out-ts
+apps/backend/dist
+/apps/backend/out-ts

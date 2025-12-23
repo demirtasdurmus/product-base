@@ -21,7 +21,7 @@ EXCLUDES=(
   ".cursor"
   ".github/instructions"
   ".harper-dictionary.txt"
-  "apps/pmobile/expo-env.d.ts"
+  "apps/mobile/expo-env.d.ts"
   "tools/scripts/clean.sh"
 )
 

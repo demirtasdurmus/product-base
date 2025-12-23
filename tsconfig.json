@@ -4,22 +4,16 @@
   "files": [],
   "references": [
     {
-      "path": "./apps/pback-e2e"
+      "path": "./apps/backend"
     },
     {
-      "path": "./apps/pback"
+      "path": "./apps/mobile"
+    },
+    {
+      "path": "./libs/backend-core"
     },
     {
       "path": "./libs/shared"
-    },
-    {
-      "path": "./apps/pmobile-e2e"
-    },
-    {
-      "path": "./apps/pmobile"
-    },
-    {
-      "path": "./libs/backend"
     }
   ]
 }
