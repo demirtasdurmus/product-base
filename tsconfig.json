@@ -4,19 +4,16 @@
   "files": [],
   "references": [
     {
-      "path": "./apps/backend-e2e"
-    },
-    {
       "path": "./apps/backend"
-    },
-    {
-      "path": "./libs/shared"
     },
     {
       "path": "./apps/mobile"
     },
     {
       "path": "./libs/backend-core"
+    },
+    {
+      "path": "./libs/shared"
     }
   ]
 }
