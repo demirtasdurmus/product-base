@@ -31,9 +31,45 @@ runs:
         fail-on-cache-miss: ${{ inputs.fail-on-cache-miss }}
         enableCrossOsArchive: ${{ inputs.enable-cross-os-archive }}
 
+    - name: 'Debug Info'
+      if: steps.cache-node-modules.outputs.cache-hit != 'true'
+      run: |
+        echo "=== Environment Debug Info ==="
+        echo "Node version: $(node --version)"
+        echo "npm version: $(npm --version)"
+        echo "OS: $(uname -a)"
+        echo "Disk space:"
+        df -h | head -5
+        echo "Working directory: $(pwd)"
+        echo "Package files:"
+        ls -lh package*.json 2>/dev/null || echo "No package files found"
+        echo "package-lock.json size:"
+        ls -lh package-lock.json 2>/dev/null || echo "package-lock.json not found"
+        echo "Workspace directories:"
+        ls -d apps/* libs/* 2>/dev/null | head -10 || echo "No workspace dirs found"
+        echo "=============================="
+      shell: bash
+
     - name: 'Install Dependencies'
       if: steps.cache-node-modules.outputs.cache-hit != 'true'
-      run: npm ci
+      run: |
+        echo "=== Starting npm ci installation ==="
+        echo "Start time: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+        # Show npm configuration for debugging
+        echo "npm config:"
+        npm config list || true
+
+        # Run npm ci with progress and verbose logging
+        npm ci --loglevel=info --no-audit --no-fund || {
+          EXIT_CODE=$?
+          echo "npm ci failed with exit code: $EXIT_CODE"
+          echo "End time: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          exit $EXIT_CODE
+        }
+
+        echo "=== npm ci completed successfully ==="
+        echo "End time: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
       shell: bash
 
     - name: 'Save Dependencies Cache'
