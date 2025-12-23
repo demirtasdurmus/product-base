@@ -57,12 +57,30 @@ runs:
         HUSKY: 0
       run: |
         echo "=== Starting npm ci installation ==="
+        START_TIME=$(date +%s)
         echo "Start time: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
         echo "Note: This may take several minutes for large dependency trees..."
 
         # Show npm configuration for debugging
         echo "npm config:"
         npm config list || true
+
+        # Start progress monitor in background
+        (
+          while true; do
+            sleep 30
+            ELAPSED=$(( $(date +%s) - START_TIME ))
+            MIN=$(( ELAPSED / 60 ))
+            SEC=$(( ELAPSED % 60 ))
+            echo "[Progress] npm ci still running... (${MIN}m ${SEC}s elapsed)"
+            # Check if node_modules is being created
+            if [ -d "node_modules" ]; then
+              PACKAGE_COUNT=$(find node_modules -maxdepth 1 -type d 2>/dev/null | wc -l || echo "0")
+              echo "[Progress] Found $PACKAGE_COUNT packages installed so far..."
+            fi
+          done
+        ) &
+        PROGRESS_PID=$!
 
         # Run npm ci with optimized settings:
         # - --prefer-offline: Use cached packages when available
@@ -72,12 +90,21 @@ runs:
         # HUSKY=0 env var skips husky prepare script (not needed in CI)
         npm ci --prefer-offline --progress=false --loglevel=warn --no-audit --no-fund || {
           EXIT_CODE=$?
+          kill $PROGRESS_PID 2>/dev/null || true
           echo "npm ci failed with exit code: $EXIT_CODE"
           echo "End time: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
           exit $EXIT_CODE
         }
 
+        # Stop progress monitor
+        kill $PROGRESS_PID 2>/dev/null || true
+
+        END_TIME=$(date +%s)
+        ELAPSED=$(( END_TIME - START_TIME ))
+        MIN=$(( ELAPSED / 60 ))
+        SEC=$(( ELAPSED % 60 ))
         echo "=== npm ci completed successfully ==="
+        echo "Total time: ${MIN}m ${SEC}s"
         echo "End time: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
       shell: bash
 
