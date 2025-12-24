@@ -9,6 +9,7 @@ import {
   View
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
 import { OnboardingScreen, OnboardingScreenData } from '../components/onboarding-screen';
 import { Button } from '../components/ui/button';
 import { DotIndicator } from '../components/ui/dot-indicator';

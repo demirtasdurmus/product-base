@@ -1,6 +1,7 @@
 import { Server } from 'http';
-import { pool } from '../db.js';
-import { logger } from '../logger.js';
+
+import { pool } from './db.js';
+import { logger } from './logger.js';
 
 let isShuttingDown = false;
 
@@ -26,6 +27,7 @@ export async function shutdownGracefully({
 
   isShuttingDown = true;
   if (error) logger.error(error, `Error during: ${signalOrEvent}`);
+
   if (reason && promise) logger.error({ reason, promise }, `Error during: ${signalOrEvent}`);
   logger.warn(`${signalOrEvent} received: starting graceful shutdown`);
 

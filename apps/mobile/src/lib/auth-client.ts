@@ -1,6 +1,7 @@
 import { expoClient } from '@better-auth/expo/client';
 import { createAuthClient } from 'better-auth/react';
 import * as SecureStore from 'expo-secure-store';
+
 import { MOBILE_SERVICE_NAME } from '@product-base/shared';
 import { env } from '../env';
 

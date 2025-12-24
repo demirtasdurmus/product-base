@@ -1,5 +1,6 @@
 import { NextFunction, Request, RequestHandler, Response } from 'express';
 import { pinoHttp } from 'pino-http';
+
 import { logger } from '../utils/logger.js';
 
 export function httpLogger({

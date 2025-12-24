@@ -23,6 +23,7 @@
     "tslib": "*",
     "drizzle-orm": "*",
     "http-status": "*",
-    "zod": "*"
+    "zod": "*",
+    "express": "^5.1.0"
   }
 }

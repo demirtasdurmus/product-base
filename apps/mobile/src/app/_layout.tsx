@@ -5,6 +5,7 @@ import { Slot, usePathname, useRouter } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { ActivityIndicator } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+
 import { onboardingService } from '../services/onboarding';
 
 /**

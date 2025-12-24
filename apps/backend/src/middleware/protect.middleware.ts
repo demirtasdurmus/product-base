@@ -1,4 +1,5 @@
 import { RequestHandler } from 'express';
+
 import { UnauthorizedError } from '@product-base/backend-core';
 
 export const protect: RequestHandler = (req, _res, next) => {

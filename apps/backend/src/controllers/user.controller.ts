@@ -1,7 +1,8 @@
 import { User } from 'better-auth';
 import { RequestHandler } from 'express';
+
+import { sendSuccessResponse } from '@product-base/backend-core';
 import { ServerResponse } from '@product-base/shared';
-import { sendSuccessResponse } from '../utils/server-utils/send-success-response.js';
 
 export const getMe: RequestHandler<
   unknown,

@@ -1,13 +1,13 @@
 import { readFileSync } from 'node:fs';
 import appRoot from 'app-root-path';
 import pino from 'pino';
+
 import { BACKEND_SERVICE_NAME } from '@product-base/shared';
 import { env } from '../env/index.js';
-import { isProdLikeEnvironment } from './server-utils/index.js';
+import { isProdLikeEnvironment } from './index.js';
 
 /**
- * TODO: Extract this out to a backend lib with a thin wrapper around pino.
- * Logger with environment-specific configuration
+ * @see https://github.com/pinojs/pino/blob/main/docs/api.md
  */
 export const logger = pino({
   // Environment-based log levels

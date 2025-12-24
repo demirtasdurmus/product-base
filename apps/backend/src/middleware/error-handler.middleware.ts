@@ -1,7 +1,8 @@
 import { ErrorRequestHandler } from 'express';
+
+import { sendErrorResponse, serializeError } from '@product-base/backend-core';
 import { ErrorResponseDetails, ServerResponse } from '@product-base/shared';
-import { sendErrorResponse } from '../utils/server-utils/send-error-response.js';
-import { serializeError } from '../utils/server-utils/serialize-error.js';
+import { isProdLikeEnvironment } from '../utils/index.js';
 
 export const errorHandler: ErrorRequestHandler<
   unknown,
@@ -20,6 +21,7 @@ export const errorHandler: ErrorRequestHandler<
 
   return sendErrorResponse({
     error,
-    res
+    res,
+    isProdLikeEnvironment
   });
 };

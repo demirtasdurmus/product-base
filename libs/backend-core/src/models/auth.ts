@@ -1,5 +1,6 @@
 import { relations } from 'drizzle-orm';
 import { boolean, index, integer, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
+
 import { timestamps } from './utils/timestamps.js';
 
 export const user = pgTable('user', {

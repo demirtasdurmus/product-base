@@ -1,13 +1,14 @@
 import { toNodeHandler } from 'better-auth/node';
 import express, { Application } from 'express';
 import helmet from 'helmet';
+
 import { errorHandler } from './middleware/error-handler.middleware.js';
 import { httpLogger } from './middleware/http-logger.middleware.js';
 import { notFoundHandler } from './middleware/not-found-handler.middleware.js';
 import { sampleRouter } from './routers/sample.router.js';
 import { userRouter } from './routers/user.router.js';
 import { auth } from './utils/auth.js';
-import { isProdLikeEnvironment } from './utils/server-utils/index.js';
+import { isProdLikeEnvironment } from './utils/index.js';
 
 const app: Application = express();
 

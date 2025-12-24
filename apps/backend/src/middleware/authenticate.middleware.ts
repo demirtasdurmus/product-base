@@ -1,5 +1,6 @@
 import { fromNodeHeaders } from 'better-auth/node';
 import { RequestHandler } from 'express';
+
 import { auth } from '../utils/auth.js';
 
 export const authenticate: RequestHandler = async (req, _res, next) => {

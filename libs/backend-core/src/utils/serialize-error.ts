@@ -1,4 +1,6 @@
 import { DrizzleQueryError } from 'drizzle-orm';
+
+import { DatabaseErrorCause } from '@product-base/shared';
 import {
   BadRequestError,
   BaseError,
@@ -9,8 +11,7 @@ import {
   isDrizzleError,
   isDrizzleQueryError,
   isNativeError
-} from '@product-base/backend-core';
-import { DatabaseErrorCause } from '@product-base/shared';
+} from '../errors/index.js';
 
 export function serializeError(err: unknown): BaseError {
   let error: BaseError;
