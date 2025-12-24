@@ -4,7 +4,7 @@ import { BACKEND_SERVICE_NAME } from '@product-base/shared';
 import { app } from './app.js';
 import { env } from './env/index.js';
 import { logger } from './utils/logger.js';
-import { shutdownGracefully } from './utils/server-utils/shutdown-gracefully.js';
+import { shutdownGracefully } from './utils/shutdown-gracefully.js';
 
 const host = env.BACKEND_HOST;
 const port = env.BACKEND_PORT;

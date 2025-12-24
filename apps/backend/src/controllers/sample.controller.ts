@@ -1,7 +1,7 @@
 import { count, eq, sql } from 'drizzle-orm';
 import { RequestHandler } from 'express';
 
-import { models, NotFoundError } from '@product-base/backend-core';
+import { models, NotFoundError, sendSuccessResponse } from '@product-base/backend-core';
 import {
   CreateSampleRequestBody,
   CreateSampleResponseBody,
@@ -16,7 +16,6 @@ import {
   UpdateSampleResponseBody
 } from '@product-base/shared';
 import { db } from '../utils/db.js';
-import { sendSuccessResponse } from '../utils/server-utils/send-success-response.js';
 
 export const createSampleController: RequestHandler<
   unknown,

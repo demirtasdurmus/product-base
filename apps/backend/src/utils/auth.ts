@@ -7,7 +7,7 @@ import { BaseError, models } from '@product-base/backend-core';
 import { BACKEND_SERVICE_NAME, MOBILE_SERVICE_NAME } from '@product-base/shared';
 import { env } from '../env/index.js';
 import { db } from './db.js';
-import { isProdLikeEnvironment } from './server-utils/index.js';
+import { isProdLikeEnvironment } from './index.js';
 
 /**
  * @see https://www.better-auth.com/docs/integrations/express

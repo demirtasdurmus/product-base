@@ -1,4 +1,4 @@
-import { env, EnvType } from '../../env/index.js';
+import { env, EnvType } from '../env/index.js';
 
 const prodLikeEnvironments: EnvType['NODE_ENV'][] = ['production'];
 

@@ -8,14 +8,8 @@ import {
   NotFoundError,
   UnauthorizedError,
   UnprocessableEntityError
-} from '@product-base/backend-core';
+} from '../errors/index.js';
 import { sendErrorResponse } from './send-error-response.js';
-
-jest.mock('./index.js', () => ({
-  isProdLikeEnvironment: false
-}));
-
-const getMockModule = () => jest.requireMock('./index.js') as { isProdLikeEnvironment: boolean };
 
 const createMockResponse = (): jest.Mocked<Response> => {
   const res = {
@@ -32,7 +26,6 @@ describe('sendErrorResponse', () => {
   beforeEach(() => {
     mockRes = createMockResponse();
     jest.clearAllMocks();
-    getMockModule().isProdLikeEnvironment = false;
   });
 
   it('should send 4xx error response in development environment', () => {
@@ -40,7 +33,8 @@ describe('sendErrorResponse', () => {
 
     sendErrorResponse({
       error,
-      res: mockRes
+      res: mockRes,
+      isProdLikeEnvironment: false
     });
 
     expect(mockRes.status).toHaveBeenCalledWith(400);
@@ -55,12 +49,12 @@ describe('sendErrorResponse', () => {
   });
 
   it('should send 4xx error response in production environment', () => {
-    getMockModule().isProdLikeEnvironment = true;
     const error = new UnauthorizedError('Access denied');
 
     sendErrorResponse({
       error,
-      res: mockRes
+      res: mockRes,
+      isProdLikeEnvironment: true
     });
 
     expect(mockRes.status).toHaveBeenCalledWith(401);
@@ -79,7 +73,8 @@ describe('sendErrorResponse', () => {
 
     sendErrorResponse({
       error,
-      res: mockRes
+      res: mockRes,
+      isProdLikeEnvironment: false
     });
 
     expect(mockRes.status).toHaveBeenCalledWith(500);
@@ -94,14 +89,14 @@ describe('sendErrorResponse', () => {
   });
 
   it('should send 5xx error response with generic message in production', () => {
-    getMockModule().isProdLikeEnvironment = true;
     const error = new InternalServerError('Sensitive internal error details', {
       issues: [{ field: 'secret', detail: 'sensitive data' }]
     });
 
     sendErrorResponse({
       error,
-      res: mockRes
+      res: mockRes,
+      isProdLikeEnvironment: true
     });
 
     expect(mockRes.status).toHaveBeenCalledWith(500);
@@ -127,7 +122,8 @@ describe('sendErrorResponse', () => {
 
     sendErrorResponse({
       error,
-      res: mockRes
+      res: mockRes,
+      isProdLikeEnvironment: false
     });
 
     expect(mockRes.json).toHaveBeenCalledWith({
@@ -153,7 +149,8 @@ describe('sendErrorResponse', () => {
 
     sendErrorResponse({
       error,
-      res: mockRes
+      res: mockRes,
+      isProdLikeEnvironment: false
     });
 
     expect(mockRes.json).toHaveBeenCalledWith({
@@ -169,7 +166,6 @@ describe('sendErrorResponse', () => {
   });
 
   it('should not include stack and originalError for 5xx errors in production', () => {
-    getMockModule().isProdLikeEnvironment = true;
     const errorData = {
       originalError: 'SELECT * FROM sensitive_table',
       stack: 'sensitive stack trace',
@@ -179,7 +175,8 @@ describe('sendErrorResponse', () => {
 
     sendErrorResponse({
       error,
-      res: mockRes
+      res: mockRes,
+      isProdLikeEnvironment: true
     });
 
     const response = mockRes.json.mock.calls[0][0];
@@ -194,7 +191,8 @@ describe('sendErrorResponse', () => {
 
     sendErrorResponse({
       error,
-      res: mockRes
+      res: mockRes,
+      isProdLikeEnvironment: false
     });
 
     expect(mockRes.json).toHaveBeenCalledWith({
@@ -212,7 +210,8 @@ describe('sendErrorResponse', () => {
 
     sendErrorResponse({
       error,
-      res: mockRes
+      res: mockRes,
+      isProdLikeEnvironment: false
     });
 
     expect(mockRes.json).toHaveBeenCalledWith({
@@ -241,7 +240,8 @@ describe('sendErrorResponse', () => {
 
       sendErrorResponse({
         error,
-        res: mockResponse
+        res: mockResponse,
+        isProdLikeEnvironment: false
       });
 
       const response = mockResponse.json.mock.calls[0][0];
@@ -262,11 +262,11 @@ describe('sendErrorResponse', () => {
 
     boundaryTests.forEach(({ error, isProd, expectGeneric }) => {
       const mockResponse = createMockResponse();
-      getMockModule().isProdLikeEnvironment = isProd;
 
       sendErrorResponse({
         error,
-        res: mockResponse
+        res: mockResponse,
+        isProdLikeEnvironment: isProd
       });
 
       const response = mockResponse.json.mock.calls[0][0];
@@ -285,7 +285,8 @@ describe('sendErrorResponse', () => {
 
     sendErrorResponse({
       error,
-      res: mockRes
+      res: mockRes,
+      isProdLikeEnvironment: true
     });
 
     const response = mockRes.json.mock.calls[0][0];
@@ -293,12 +294,12 @@ describe('sendErrorResponse', () => {
   });
 
   it('should always include error object in response', () => {
-    getMockModule().isProdLikeEnvironment = true;
     const error = new InternalServerError('Test message');
 
     sendErrorResponse({
       error,
-      res: mockRes
+      res: mockRes,
+      isProdLikeEnvironment: false
     });
 
     const response = mockRes.json.mock.calls[0][0];
@@ -320,7 +321,8 @@ describe('sendErrorResponse', () => {
 
     sendErrorResponse({
       error,
-      res: mockRes
+      res: mockRes,
+      isProdLikeEnvironment: false
     });
 
     const response = mockRes.json.mock.calls[0][0];
@@ -333,7 +335,8 @@ describe('sendErrorResponse', () => {
 
     sendErrorResponse({
       error,
-      res: mockRes
+      res: mockRes,
+      isProdLikeEnvironment: false
     });
 
     expect(mockRes.status).toHaveBeenCalledWith(400);
@@ -346,7 +349,8 @@ describe('sendErrorResponse', () => {
 
     sendErrorResponse({
       error,
-      res: mockRes
+      res: mockRes,
+      isProdLikeEnvironment: false
     });
 
     expect(mockRes.json).toHaveBeenCalledWith({
@@ -365,7 +369,8 @@ describe('sendErrorResponse', () => {
 
     sendErrorResponse({
       error,
-      res: mockRes
+      res: mockRes,
+      isProdLikeEnvironment: false
     });
 
     expect(mockRes.json).toHaveBeenCalledWith({
@@ -385,7 +390,8 @@ describe('sendErrorResponse', () => {
 
     sendErrorResponse({
       error: customError,
-      res: mockRes
+      res: mockRes,
+      isProdLikeEnvironment: false
     });
 
     expect(mockRes.status).toHaveBeenCalledWith(418);
