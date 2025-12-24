@@ -15,13 +15,18 @@ server.listen(port, host, () => {
   logger.info(`[${BACKEND_SERVICE_NAME}] is now ready at http://${host}:${port}`);
 });
 
-process.on('SIGINT', () => shutdownGracefully({ signalOrEvent: 'SIGINT', server }));
-process.on('SIGTERM', () => shutdownGracefully({ signalOrEvent: 'SIGTERM', server }));
+/**
+ * Attach shutdown handlers to the process only if not in test environment
+ */
+if (env.NODE_ENV !== 'test') {
+  process.on('SIGINT', () => shutdownGracefully({ signalOrEvent: 'SIGINT', server }));
+  process.on('SIGTERM', () => shutdownGracefully({ signalOrEvent: 'SIGTERM', server }));
 
-process.on('uncaughtException', (error) => {
-  shutdownGracefully({ signalOrEvent: 'uncaughtException', server, error });
-});
+  process.on('uncaughtException', (error) => {
+    shutdownGracefully({ signalOrEvent: 'uncaughtException', server, error });
+  });
 
-process.on('unhandledRejection', (reason, promise) => {
-  shutdownGracefully({ signalOrEvent: 'unhandledRejection', server, reason, promise });
-});
+  process.on('unhandledRejection', (reason, promise) => {
+    shutdownGracefully({ signalOrEvent: 'unhandledRejection', server, reason, promise });
+  });
+}
