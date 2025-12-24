@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import Ionicons from '@expo/vector-icons/AntDesign';
 import { router } from 'expo-router';
 import { View } from 'react-native';
+
 import { Avatar, AvatarFallback, AvatarImage } from '../components/ui/avatar';
 import { Button } from '../components/ui/button';
 import { Card, CardFooter, CardHeader } from '../components/ui/card';

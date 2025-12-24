@@ -1,4 +1,5 @@
 import { z } from 'zod';
+
 import { parseObjectWithZod } from './index.js';
 
 describe('parseObjectWithZod', () => {

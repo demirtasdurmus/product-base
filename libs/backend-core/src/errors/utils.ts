@@ -1,5 +1,6 @@
 import { DrizzleError, DrizzleQueryError } from 'drizzle-orm';
 import { $ZodIssue } from 'zod/v4/core';
+
 import { BaseErrorIssue, DatabaseErrorCause } from '@product-base/shared';
 import { BaseError } from './error.js';
 

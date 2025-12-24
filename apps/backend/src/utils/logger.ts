@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import appRoot from 'app-root-path';
 import pino from 'pino';
+
 import { BACKEND_SERVICE_NAME } from '@product-base/shared';
 import { env } from '../env/index.js';
 import { isProdLikeEnvironment } from './server-utils/index.js';

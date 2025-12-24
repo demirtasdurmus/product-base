@@ -1,6 +1,7 @@
 import { toNodeHandler } from 'better-auth/node';
 import express, { Application } from 'express';
 import helmet from 'helmet';
+
 import { errorHandler } from './middleware/error-handler.middleware.js';
 import { httpLogger } from './middleware/http-logger.middleware.js';
 import { notFoundHandler } from './middleware/not-found-handler.middleware.js';

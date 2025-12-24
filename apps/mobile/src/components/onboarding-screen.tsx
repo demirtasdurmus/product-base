@@ -1,4 +1,5 @@
 import { Image, ImageSourcePropType, useWindowDimensions, View } from 'react-native';
+
 import { H2, P } from './ui/typography';
 
 export type OnboardingScreenData = {

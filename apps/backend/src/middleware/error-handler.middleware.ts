@@ -1,4 +1,5 @@
 import { ErrorRequestHandler } from 'express';
+
 import { ErrorResponseDetails, ServerResponse } from '@product-base/shared';
 import { sendErrorResponse } from '../utils/server-utils/send-error-response.js';
 import { serializeError } from '../utils/server-utils/serialize-error.js';
