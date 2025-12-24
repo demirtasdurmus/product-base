@@ -33,7 +33,17 @@ jobs:
       - name: Derive appropriate SHAs for base and head for `nx affected` commands
         uses: nrwl/nx-set-shas@v4
 
+      # @see https://github.com/Infisical/secrets-action
+      - name: Inject infisical secrets as env variables
+        uses: Infisical/secrets-action@v1.0.9
+        with:
+          client-id: ${{ secrets.INFISICAL_MACHINE_IDENTITY_CLIENT_ID }}
+          client-secret: ${{ secrets.INFISICAL_MACHINE_IDENTITY_CLIENT_SECRET }}
+          project-slug: ${{ secrets.INFISICAL_PRODUCT_BASE_PROJECT_SLUG }}
+          env-slug: "test"
+
       - name: Lint, Test, Build, Typecheck
         run: |
           npx nx affected -t build --exclude=mobile
           npx nx affected -t test lint typecheck
+          npx nx affected -t test:int
