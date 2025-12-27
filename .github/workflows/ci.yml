@@ -40,7 +40,7 @@ jobs:
           client-id: ${{ secrets.INFISICAL_MACHINE_IDENTITY_CLIENT_ID }}
           client-secret: ${{ secrets.INFISICAL_MACHINE_IDENTITY_CLIENT_SECRET }}
           project-slug: ${{ secrets.INFISICAL_PRODUCT_BASE_PROJECT_SLUG }}
-          env-slug: "test"
+          env-slug: 'test'
 
       - name: Lint, Test, Build, Typecheck
         run: |
