@@ -2,7 +2,7 @@
 module.exports = {
   upgrade: true,
   target: 'patch',
-  packageManager: 'npm',
+  packageManager: 'pnpm',
   packageFile: 'package.json',
   reject: (name, _semver) => {
     if (
